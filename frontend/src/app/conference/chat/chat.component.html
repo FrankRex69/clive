@@ -1,0 +1,41 @@
+<div class="chat-container">
+  <div class="gradient"></div>
+  <div class="msgArea" id="msgArea">
+    <ul id="message-list">
+      <div
+        class="message"
+        *ngFor="let msg of chatService.chatMessages$ | async"
+      >
+        <li class="header" [class.mine]="user.nomecognome == msg.nominativo">
+          {{ msg.nominativo }} - {{ msg.data | date: 'dd/MM/yy - hh:mm:ss' }}
+        </li>
+        <li class="content" [class.mine]="user.nomecognome == msg.nominativo">
+          {{ msg.messaggio }}
+        </li>
+      </div>
+    </ul>
+  </div>
+  <div class="input">
+    <ion-textarea
+      id="txtArea"
+      [(ngModel)]="myTextMessage"
+      (keyup.enter)="sendMsg()"
+      (keydown.enter)="onKeydown($event)"
+    >
+    </ion-textarea>
+    <ion-button
+      [disabled]="!myTextMessage"
+      size="small"
+      class="btn square-btn"
+      (click)="sendMsg()"
+      #btnTxt
+    >
+      <ion-icon
+        size="small"
+        position="icon-only"
+        color="tertiary"
+        name="send"
+      ></ion-icon>
+    </ion-button>
+  </div>
+</div>

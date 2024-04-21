@@ -1,0 +1,63 @@
+.card-out {
+  max-height: 90vh;
+  margin-left: 0;
+  margin-right: 0;
+  box-shadow: none;
+  --background: var(--ion-color-secondary);
+  border-radius: 14px;
+}
+
+.card-inside {
+  max-height: 50vh;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.shp {
+  max-height: 80vh;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.bottoni {
+  display: flex;
+  flex-direction: column;
+  box-shadow: none;
+  justify-content: center;
+  align-items: center;
+}
+.secondary-data {
+  font-size: 0.5rem;
+  word-wrap: break-word;
+  text-decoration: none;
+}
+.primary-data {
+  font-size: 0.7rem;
+  word-wrap: break-word;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding-right: 10px;
+}
+
+.top-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link-button {
+  display: flex;
+  flex-direction: column;
+}
+
+.titolo-gestione {
+  background-color: var(--ion-color-secondary);
+  font-size: 8px;
+  padding: 2px;
+  padding-left: 8px;
+}

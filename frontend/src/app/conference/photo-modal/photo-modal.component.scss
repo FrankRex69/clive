@@ -1,0 +1,119 @@
+.label {
+  position: absolute;
+  top: 16px;
+  padding: 4px;
+  background-color: white;
+  opacity: 0.6;
+  font-size: 0.8rem;
+  p {
+    margin: 4px;
+    color: var(--ion-color-dark);
+  }
+}
+
+.left {
+  left: 16px;
+  text-align: start;
+}
+
+.right {
+  right: 16px;
+  text-align: end;
+}
+
+.form-container {
+  height: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  .image-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    .imgEcanvas {
+      position: relative;
+      img {
+        max-height: 20rem;
+      }
+      app-board {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+    }
+  }
+  .form-buttons {
+    display: block;
+    align-self: flex-end;
+    padding-top: 8px;
+    ion-button {
+      margin: 0;
+      font-size: 0.8rem;
+      --border-radius: 0px;
+    }
+  }
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+ion-item {
+  margin-top: 8px;
+  border-radius: 5px;
+  border: solid 1px var(--ion-color-dark);
+  --highlight-height: 0px;
+  --min-height: 32px;
+  ion-label {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin: 0;
+    font-size: 0.9rem;
+    align-self: flex-start;
+  }
+  .input {
+    --padding-top: 8px;
+    --padding-bottom: 8px;
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+}
+
+.testoData {
+  text-align: center;
+  font-size: smaller;
+}
+
+.btn-trasparent {
+  position: absolute;
+  --background: #fff;
+  color: #000;
+  z-index: 999 !important;
+}
+.lavagna {
+  right: 0;
+  bottom: 0;
+}
+.chiudi {
+  right: 0;
+  bottom: 0;
+}
+.cancella {
+  right: 32px;
+  bottom: 0;
+}
+
+ion-label {
+  opacity: 70%;
+}
+
+ion-input {
+  font-weight: 500;
+  font-size: 1rem;
+}

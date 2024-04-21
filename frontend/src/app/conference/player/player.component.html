@@ -1,0 +1,145 @@
+<div class="player-and-users-container">
+  <div
+    #player
+    [ngClass]="{
+      'player-container': !fullscreen.isEnabled,
+      'player-fullscreen': fullscreen.isEnabled
+    }"
+  >
+    <div class="map-and-label">
+      <ion-button
+        *ngIf="fullscreen.isEnabled"
+        class="square-btn white no-margin"
+        (click)="toggleMap()"
+      >
+        <ion-icon
+          *ngIf="!isMapVisible"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/map-on.svg"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="isMapVisible"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/map-off.svg"
+        ></ion-icon>
+      </ion-button>
+      <div class="label" *ngIf="streamService.streamingUser">
+        <ion-text *ngIf="streamService.streamingUser.idutente == user.idutcas">
+          Live
+          <ion-icon name="ellipse"></ion-icon>
+        </ion-text>
+        <ion-text *ngIf="streamService.streamingUser.idutente != user.idutcas">
+          {{ streamService.streamingUser.nome }}
+        </ion-text>
+      </div>
+    </div>
+    <div
+      class="video-container"
+      [ngClass]="{
+        'video-fullscreen': fullscreen.isEnabled,
+        'video-desktop-web': platform.is('desktop') && !fullscreen.isEnabled,
+        'video-android-web':
+          platform.is('android') &&
+          platform.is('mobileweb') &&
+          !fullscreen.isEnabled,
+        'video-android-native':
+          platform.is('android') &&
+          (platform.is('capacitor') || platform.is('cordova')) &&
+          !fullscreen.isEnabled,
+        'video-ios-web':
+          platform.is('ios') &&
+          platform.is('mobileweb') &&
+          !fullscreen.isEnabled,
+        'video-ios-native':
+          platform.is('ios') &&
+          (platform.is('capacitor') || platform.is('cordova')) &&
+          !fullscreen.isEnabled
+      }"
+    >
+      <div
+        [ngClass]="isPip ? 'canvasEvideo-pip' : 'canvasEvideo'"
+        [class.portrait]="streamService.isVideoPortrait"
+      >
+        <div [hidden]="streamService.isStreaming || streamService.isPlaying">
+          <img *ngIf="!streamService.isLoading" src="assets/wait.svg" />
+          <ion-spinner
+            *ngIf="streamService.isLoading"
+            color="tertiary"
+          ></ion-spinner>
+        </div>
+        <app-shared-board
+          *ngIf="sbService.isBoardVisible && !isPip"
+          id="shared-board"
+          [@inOutAnimation]
+          [room]="room"
+        >
+        </app-shared-board>
+        <video
+          id="localVideo"
+          [hidden]="!streamService.isStreaming"
+          #localVideo
+          [autoplay]="true"
+          [muted]="true"
+        ></video>
+        <video
+          id="remoteVideo"
+          [hidden]="!streamService.isPlaying"
+          #remoteVideo
+          [autoplay]="true"
+          [muted]="true"
+          playsinline
+        ></video>
+      </div>
+      <app-map
+        [hidden]="!isMapVisible"
+        [roomId]="room?.id"
+        [isInsidePlayer]="true"
+        [tag]="'-fullscreen'"
+      ></app-map>
+    </div>
+    <app-player-bar
+      [user]="user"
+      [isLandscape]="isLandscape"
+      [isPip]="isPip"
+      (toggleStreaming)="
+        streamService.toggleStreaming(room.id, user.idutcas, isLandscape)
+      "
+      (toggleAudio)="audioService.toggleAudio(room.id.toString(), user.idutcas)"
+      (toggleMic)="audioService.toggleMic(user.idutcas)"
+      (toggleGps)="gpsService.toggleGps()"
+      (toggleFullscreen)="toggleFullscreen()"
+      (generateQrCode)="generateQrCode()"
+      (capturePhoto)="capturePhoto()"
+      (openSettings)="openSettings()"
+      (clearCanvasBoard)="sbService.clearCanvasBoard(room.id)"
+      (openBoard)="sbService.openBoard(room.id)"
+      (closeBoard)="sbService.closeBoard(room.id)"
+      (selectColor)="sbService.selectColor($event)"
+    ></app-player-bar>
+  </div>
+  <div
+    class="ion-hide-lg-up users-list"
+    [ngClass]="isListOpen ? 'list-open' : 'list-closed'"
+  >
+    <app-users-list
+      class="no-scroll"
+      [isListOpen]="isListOpen"
+    ></app-users-list>
+    <ion-button
+      class="square-btn clear no-margin"
+      [ngStyle]="{ 'align-self': 'flex-end' }"
+      (click)="isListOpen = !isListOpen"
+    >
+      <ion-icon
+        *ngIf="!isListOpen"
+        slot="icon-only"
+        name="chevron-up-sharp"
+      ></ion-icon>
+      <ion-icon
+        *ngIf="isListOpen"
+        slot="icon-only"
+        name="chevron-down-sharp"
+      ></ion-icon>
+    </ion-button>
+  </div>
+</div>

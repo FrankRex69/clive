@@ -1,0 +1,37 @@
+.card-inside {
+  overflow: hidden;
+  overflow-y: auto;
+  box-shadow: none;
+}
+
+.custom-list-close {
+  display: none;
+}
+
+.custom-list-open {
+  display: block;
+  max-height: 200px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.dropdown {
+  position: relative;
+  display: block;
+}
+
+.dropdown-content {
+  background-color: #fff;
+  display: none;
+  position: absolute;
+  max-height: 200px;
+  overflow: hidden;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  z-index: 2;
+}
+
+.show {
+  display: block;
+}

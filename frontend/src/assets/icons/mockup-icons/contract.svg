@@ -1,0 +1,10 @@
+<svg id="Livello_1" data-name="Livello 1"
+  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <title>contract</title>
+  <g id="contract">
+    <path d="M12.26,12.26H1v5.28H17.54V1H12.26Z"/>
+    <path d="M1,30.46v5.28H12.26V47h5.28V30.46Z"/>
+    <path d="M30.46,30.46V47h5.28V35.74H47V30.46Z"/>
+    <path d="M35.74,12.26V1H30.46V17.54H47V12.26Z"/>
+  </g>
+</svg>

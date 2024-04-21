@@ -1,0 +1,101 @@
+<ion-header class="ion-hide-md-up">
+  <ion-toolbar>
+    <ion-title>Cattura Foto</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="form" class="form-container">
+    <div class="image-container">
+      <div class="imgEcanvas">
+        <app-board
+          [imgBase64]="imgBase64"
+          id="board"
+          [@inOutAnimation]
+          #drawPathClient
+          *ngIf="isBoardVisible"
+        ></app-board>
+        <img
+          *ngIf="this.imgBase64 !== undefined"
+          #img
+          id="img"
+          class="img"
+          [src]="imgBase64"
+        />
+      </div>
+      <!-- <canvas
+        hidden="true"
+        #canvas
+        id="canvas"
+        class="canvas"
+        [width]="WIDTH"
+        [height]="HEIGHT"
+      >
+      </canvas> -->
+      <ion-button
+        *ngIf="isBoardVisible"
+        class="square-btn btn-trasparent cancella"
+        (click)="clearCanvasBoard()"
+      >
+        <ion-icon slot="icon-only" src="assets/icons/mockup-icons/trash.svg">
+        </ion-icon>
+      </ion-button>
+      <ion-button
+        *ngIf="!isBoardVisible"
+        class="square-btn btn-trasparent lavagna"
+        (click)="openBoard()"
+      >
+        <ion-icon
+          slot="icon-only"
+          src="assets/icons/mockup-icons/board.svg"
+        ></ion-icon>
+      </ion-button>
+      <ion-button
+        class="square-btn btn-trasparent chiudi"
+        *ngIf="isBoardVisible"
+        (click)="isBoardVisibleApply()"
+      >
+        <ion-icon
+          slot="icon-only"
+          *ngIf="isBoardVisible"
+          name="checkmark"
+        ></ion-icon>
+      </ion-button>
+    </div>
+    <div class="label left">
+      <p>{{ date | date: 'dd/MM/yy' }}</p>
+      <p>{{ date | date: 'HH:mm:ss' }}</p>
+    </div>
+    <div class="label right">
+      <p>{{ coordinates.latitude }}</p>
+      <p>{{ coordinates.longitude }}</p>
+    </div>
+    <ion-item lines="none">
+      <ion-label color="dark" position="fixed">Nome:</ion-label>
+      <ion-input
+        placeholder="Nome elemento"
+        formControlName="nomeElemento"
+        class="input"
+        type="text"
+      ></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label color="dark" position="fixed">Note:</ion-label>
+      <ion-textarea
+        placeholder="Note aggiuntive ..."
+        formControlName="note"
+        class="input"
+        type="text"
+        rows="2"
+      ></ion-textarea>
+    </ion-item>
+    <div class="grow"></div>
+    <div class="form-buttons">
+      <ion-button class="clear" type="button" (click)="closeModal()"
+        >Annulla</ion-button
+      >
+      <ion-button color="primary" type="submit" (click)="createPhoto()"
+        >Salva foto</ion-button
+      >
+    </div>
+  </form>
+</ion-content>

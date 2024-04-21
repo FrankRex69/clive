@@ -1,0 +1,159 @@
+<ion-header [hidden]="fullscreen.isEnabled">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button> -->
+      <ion-button (click)="this.roomFunctions.copyLink(room)">
+        <ion-icon slot="icon-only" name="share-social"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="room">
+      <ion-text class="title">{{room?.progetto}} ({{room?.id}})</ion-text>
+      <br />
+      <ion-text class="subTitle">{{room?.sessione}}</ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        *ngIf="user?.btnGall == 1"
+        routerLink="/gallery/{{room?.id}}/{{room?.progetto}}"
+      >
+        <ion-icon slot="icon-only" name="images-sharp"></ion-icon>
+      </ion-button>
+      <ion-menu-button></ion-menu-button>
+      <!-- <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-content [scrollY]="!player2?.isBoardVisibleMyTouch"> -->
+<ion-content>
+  <div *ngIf="isLoading" class="ion-text-center ion-padding">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-grid *ngIf="!isLoading">
+    <ion-segment
+      class="ion-hide-lg-up"
+      (ionChange)="segmentChanged($event)"
+      [(ngModel)]="selectedTab"
+    >
+      <ion-segment-button value="call">
+        <ion-label>Call</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="mappa">
+        <ion-label>Mappa</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="chat">
+        <ion-label>Chat</ion-label>
+      </ion-segment-button>
+      <div
+        class="notification noti2"
+        *ngIf="chat.notificationCounter >= 1"
+      ></div>
+      <div
+        class="notification noti3"
+        *ngIf="chat.notificationCounter >= 1"
+      ></div>
+      <div class="notification" *ngIf="chat.notificationCounter >= 1">
+        {{chat.notificationCounter}}
+      </div>
+    </ion-segment>
+    <ion-row class="ion-hide-lg-down">
+      <ion-col sizeLg="4.5" sizeXs="6">
+        <ion-button
+          class="tab-btn"
+          [ngClass]="{'tab-active' : isVideoVisible}"
+          (click)="toggleVideo()"
+        >
+          <ion-text>Call</ion-text>
+          <ion-icon
+            class="show-password"
+            [name]="isVideoVisible ? 'eye-outline' : 'eye-off-outline'"
+          ></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col sizeLg="4.5" sizeXs="6">
+        <ion-button
+          class="tab-btn"
+          [ngClass]="{'tab-active' : isMapVisible}"
+          (click)="toggleMappa()"
+        >
+          <ion-text>Mappa</ion-text>
+          <ion-icon
+            class="show-password"
+            [name]="isMapVisible ? 'eye-outline' : 'eye-off-outline'"
+          ></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col sizeLg="3" sizeXs="4">
+        <div class="chat-users">
+          <ion-text
+            >{{(chat.isVisible ? 'Chat' : 'Partecipanti') |
+            uppercase}}</ion-text
+          >
+          <ion-button
+            class="square-btn clear no-margin"
+            [ngClass]="{'button-active' : isPartecipantVisible}"
+            (click)="toggleParticipant()"
+          >
+            <ion-icon slot="icon-only" name="people-sharp"></ion-icon>
+          </ion-button>
+          <ion-button
+            class="square-btn clear no-margin"
+            [ngClass]="{'button-active' : chat.isVisible}"
+            (click)="toggleChat()"
+          >
+            <ion-icon slot="icon-only" name="chatbox"></ion-icon>
+          </ion-button>
+          <div
+            class="notification noti2"
+            *ngIf="chat.notificationCounter >= 1"
+          ></div>
+          <div
+            class="notification noti3"
+            *ngIf="chat.notificationCounter >= 1"
+          ></div>
+          <div class="notification" *ngIf="chat.notificationCounter >= 1">
+            {{chat.notificationCounter}}
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row style="flex-grow: 1">
+      <ion-col
+        [hidden]="!isVideoVisible"
+        [sizeLg]="isMapVisible ? '4.5' : '9'"
+        sizeXs="12"
+      >
+        <app-player #player [room]="room" [user]="user"></app-player>
+      </ion-col>
+      <ion-col
+        id="mappa"
+        [hidden]="!isMapVisible"
+        [sizeLg]="isVideoVisible ? '4.5' : '9'"
+        sizeXs="12"
+      >
+        <app-map
+          [user]="user"
+          [roomId]="room?.id"
+          [isInsidePlayer]="false"
+          [tag]="'-principale'"
+        ></app-map>
+      </ion-col>
+      <ion-col [hidden]="isMobile && !chat.isVisible" sizeLg="3" sizeXs="12">
+        <app-users-list
+          class="no-scroll ion-hide-lg-down"
+          [hidden]="!isPartecipantVisible"
+          [isListOpen]="true"
+        >
+        </app-users-list>
+        <app-chat [hidden]="!chat.isVisible" [roomId]="room.id" [user]="user">
+        </app-chat>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

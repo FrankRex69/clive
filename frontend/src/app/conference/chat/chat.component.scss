@@ -1,0 +1,140 @@
+.chat-container {
+  background: #f1f1f1;
+  height: 100%;
+  width: auto;
+  position: relative;
+}
+
+.input:focus {
+  outline: none;
+}
+.input {
+  position: absolute;
+  bottom: 0.25rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+  padding: 0 0.25rem 0.5rem 0.25rem;
+  width: 100%;
+
+  .btn {
+    background: var(--ion-color-primary);
+    border-radius: 5px;
+
+    margin: 0.8rem 0.25rem 0.25rem 0.25rem;
+
+    color: #fff;
+  }
+  #txtArea {
+    background: rgb(255, 255, 255);
+    color: rgba(0, 0, 0, 0.9);
+    width: 80%;
+    height: 100%;
+    font-size: 1rem;
+    overflow-y: hidden;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #242424;
+  }
+}
+
+.msgArea {
+  margin-top: 40px;
+  max-height: 82%;
+  overflow-y: scroll;
+  background-color: transparent !important;
+  font-size: 12px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  position: absolute;
+  color: #242424 !important;
+  border-radius: 4px;
+  width: calc(100% - 10px);
+  height: auto;
+  bottom: 60px;
+  vertical-align: middle;
+  line-height: 16px;
+}
+.gradient {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  height: 25%;
+  z-index: 2;
+  background-image: linear-gradient(#f1f1f1, #f1f1f100);
+}
+
+.msgArea::-webkit-scrollbar {
+  display: none !important;
+}
+
+.msgArea {
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: none !important; /* Firefox */
+}
+
+#message-list {
+  font-size: 0.9rem;
+  list-style-type: none;
+  margin: 0;
+  padding: 0.5rem;
+  // li {
+  //   padding: 0.5rem 1rem;
+  // }
+  // li:nth-child(odd) {
+  //   background: #efefef;
+  // }
+}
+
+.message {
+  .header {
+    font-size: 8px;
+    margin-bottom: -18px;
+    color: #aeaeae;
+    text-transform: uppercase;
+    &.mine {
+      text-align: right;
+    }
+  }
+  .content {
+    animation: msgYou forwards 0.2s;
+    margin: 20px 8px;
+    padding: 3px;
+    border-bottom-style: groove;
+    border-color: #aeaeae;
+    border-bottom-width: 2px;
+    font-weight: 600;
+    &.mine {
+      animation: msgMe forwards 0.2s;
+      text-align: right;
+      color: #03477e;
+    }
+  }
+}
+
+@keyframes msgMe {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes msgYou {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

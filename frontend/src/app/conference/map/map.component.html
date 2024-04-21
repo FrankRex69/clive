@@ -1,0 +1,80 @@
+<div class="map-container" [class.padding]="!isInsidePlayer">
+  <div [id]="'map' + tag" class="map">
+    <!-- <div *ngIf="!isInsidePlayer" id="mouse-position"></div> -->
+    <!-- IMFO KMZ DA DECOMMENTARE PER ATTIVARE -->
+    <!--     <div #info id="info" *ngIf="isInfo" [@inOutAnimation]></div>
+    <div class="box-toggle box-toggle-kmz">
+      <ion-icon slot="icon-only" size="large" color="medium" name="information-circle"></ion-icon>
+      <ion-toggle color="success" (click)="toggleDisplayInfo()"></ion-toggle>
+    </div> -->
+  </div>
+  <div *ngIf="!isInsidePlayer" class="top-bar">
+    <ion-button
+      disabled
+      *ngIf="!markerService.isMarkerBluOn && user?.btnInsMkr == 1"
+      class="btn-delete-marker fake no-margin"
+      >Inserisci un Marker
+    </ion-button>
+    <ion-button
+      *ngIf="markerService.isMarkerBluOn && user?.btnInsMkr == 1"
+      class="btn-delete-marker danger no-margin"
+      (click)="deleteMarkerLayer()"
+    >
+      <ion-icon
+        slot="start"
+        src="assets/icons/mockup-icons/trash.svg"
+      ></ion-icon>
+      Elimina Marker
+    </ion-button>
+    <div>
+      <ion-button
+        class="square-btn clear no-margin"
+        (click)="gpsService.togglefollowOperator()"
+      >
+        <ion-icon
+          *ngIf="this.gpsService.followOperator"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/position-ON.svg"
+        >
+        </ion-icon>
+        <ion-icon
+          *ngIf="!this.gpsService.followOperator"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/position-OFF.svg"
+        >
+        </ion-icon>
+      </ion-button>
+      <ion-button
+        *ngIf="user?.btnGpsOn == 1"
+        [disabled]="
+          streamService.isLoading ||
+          streamService.isStreaming ||
+          streamService.isPlaying
+        "
+        class="square-btn clear no-margin"
+        [ngClass]="{ active: this.gpsService.isGpsOn }"
+        (click)="gpsService.toggleGps()"
+      >
+        <ion-icon
+          *ngIf="this.gpsService.isGpsOn"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/gps-ON.svg"
+        >
+        </ion-icon>
+        <ion-icon
+          *ngIf="!this.gpsService.isGpsOn"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/gps-OFF.svg"
+        >
+        </ion-icon>
+      </ion-button>
+    </div>
+  </div>
+  <div *ngIf="!isInsidePlayer" class="bottom-bar">
+    <div></div>
+    <ion-button class="square-btn fake no-margin" disabled>
+      <!-- <ion-icon slot="icon-only" name="close">
+    </ion-icon> -->
+    </ion-button>
+  </div>
+</div>

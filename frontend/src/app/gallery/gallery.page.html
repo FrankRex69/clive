@@ -1,0 +1,240 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-menu-toggle auto-hide="false" class="ion-padding-end">
+        <ion-button>
+          <ion-icon name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <div class="header">
+      <!-- <ion-title>Media</ion-title> -->
+      <div class="backTitle">
+        <ion-button
+          class="btn-trasparent ion-no-padding"
+          (click)="toRoomPage()"
+        >
+          <ion-icon
+            name="chevron-back-outline"
+            size="large"
+            slot="icon-only"
+            class="ion-margin"
+            color="light"
+          >
+          </ion-icon>
+        </ion-button>
+        <div>
+          <h6 class="title">{{roomName}}</h6>
+        </div>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  [scrollEvents]="true"
+  (ionScroll)="getScrollPos($event.detail.scrollTop)"
+>
+  <!-- Versione MOBILE -->
+  <div class="ion-hide-md-up">
+    <ion-card class="card-title">
+      <!-- <div class="backTitle">
+        <ion-button class="btn-trasparent ion-no-padding" (click)="toRoomPage()">
+          <ion-icon name="chevron-back-outline" size="large" slot="icon-only" class="ion-margin"></ion-icon>
+        </ion-button>
+        <div>
+          <h6 class="title">{{roomName}}</h6>
+        </div>
+      </div> -->
+
+      <div class="icons">
+        <!--       <ion-button class="btn-trasparent ion-no-padding">
+        <ion-icon class="ion-margin" name="map" size="large" slot="icon-only"></ion-icon>
+      </ion-button> -->
+        <ion-button
+          *ngIf="user?.btnGallDownload ==1"
+          class="btn-trasparent ion-no-padding"
+          (click)="downloadPhotos()"
+        >
+          <ion-icon
+            class="ion-margin"
+            name="cloud-download"
+            size="large"
+            slot="icon-only"
+          ></ion-icon>
+        </ion-button>
+        <!--       <ion-button class="btn-trasparent ion-no-padding">
+        <ion-icon class="ion-margin" name="trash" size="large" slot="icon-only"></ion-icon>
+      </ion-button> -->
+      </div>
+    </ion-card>
+    <!--  -->
+
+    <ion-segment [(ngModel)]="galleryType" color="primary" class="ion-padding">
+      <ion-segment-button value="foto"> Foto </ion-segment-button>
+      <ion-segment-button value="files"> Files </ion-segment-button>
+    </ion-segment>
+
+    <div [ngSwitch]="galleryType">
+      <ion-grid *ngSwitchCase="'foto'">
+        <ion-row>
+          <div *ngIf="isLoading" class="ion-padding-horizontal load-spin">
+            <ion-spinner></ion-spinner>
+          </div>
+          <ion-col *ngFor="let photo of (photoSet$ | async)">
+            <ion-thumbnail
+              class="foto-thumbnail-mobile"
+              (click)="editPhoto(photo)"
+            >
+              <div class="data-id">
+                <p>ID: {{ photo.idPhoto }}</p>
+                <p>Data: {{ photo.dataimg | date: 'dd/MM/yyyy - HH:mm' }}</p>
+              </div>
+              <img
+                [src]="'data:image/png;base64,'+photo.imageBase64 | safeHtml"
+              />
+              <div class="note-yes" *ngIf="photo.noteimg">
+                <ion-icon
+                  class="note-ico"
+                  slot="icon-only"
+                  src="assets/icons/mockup-icons/note.svg"
+                >
+                </ion-icon>
+              </div>
+            </ion-thumbnail>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-infinite-scroll
+        threshold="5%"
+        position="bottom"
+        (ionInfinite)="loadPhotos($event)"
+      >
+        <ion-infinite-scroll-content
+          loadingSpinner="dots"
+          loadingText="Caricamento..."
+        >
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
+
+  <div class="ion-hide-md-down">
+    <!-- Versione desktop -->
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" offset="1">
+          <!-- <ion-card class="card-title"> -->
+          <div class="backTitle-desktop">
+            <ion-button
+              class="btn-trasparent ion-no-padding title-btn"
+              (click)="toRoomPage()"
+            >
+              <ion-icon
+                name="chevron-back-outline"
+                slot="icon-only"
+                class="ion-margin"
+              ></ion-icon>
+            </ion-button>
+            <div>
+              <h6 class="title">{{roomName}}</h6>
+            </div>
+          </div>
+          <!-- </ion-card> -->
+        </ion-col>
+        <ion-col size="5" offset="2">
+          <div class="head-btn-desktop">
+            <ion-button
+              class="btn-trasparent ion-no-padding"
+              (click)="downloadPhotos()"
+            >
+              <ion-icon
+                class="ion-margin"
+                name="cloud-download"
+                size="large"
+                slot="icon-only"
+              ></ion-icon>
+            </ion-button>
+
+            <ion-segment [(ngModel)]="galleryType" class="ion-padding">
+              <ion-segment-button value="foto" class="segment-btn">
+                Foto
+              </ion-segment-button>
+              <ion-segment-button value="files" class="segment-btn">
+                Files
+              </ion-segment-button>
+            </ion-segment>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="10" offset="1">
+          <div class="divider"></div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="10" offset="1">
+          <div [ngSwitch]="galleryType">
+            <ion-grid *ngSwitchCase="'foto'">
+              <ion-row>
+                <div *ngIf="isLoading" class="load-container" [@inOutAnimation]>
+                  <div id="building" style="font-size: 12px">
+                    <div id="blocks">
+                      <div class="b" id="b1"></div>
+                      <div class="b" id="b2"></div>
+                      <div class="b" id="b3"></div>
+                      <div class="b" id="b4"></div>
+                    </div>
+                    <!--                     <div id="caption">
+                      Caricamento foto ...
+                    </div> -->
+                  </div>
+                </div>
+                <ion-col *ngFor="let photo of (photoSet$ |async)">
+                  <ion-thumbnail
+                    class="foto-thumbnail-desktop"
+                    (click)="editPhoto(photo)"
+                  >
+                    <img
+                      [src]="'data:image/png;base64,'+photo.imageBase64 | safeHtml"
+                    />
+                    <div class="data-id">
+                      <p>ID: {{ photo.idPhoto }}</p>
+                      <p>
+                        Data: {{ photo.dataimg | date: 'dd/MM/yyyy - HH:mm' }}
+                      </p>
+                    </div>
+                    <div class="note-yes" *ngIf="photo.noteimg">
+                      <ion-icon
+                        class="note-ico"
+                        slot="icon-only"
+                        src="assets/icons/mockup-icons/note.svg"
+                      >
+                      </ion-icon>
+                    </div>
+                  </ion-thumbnail>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-infinite-scroll
+              threshold="5%"
+              position="bottom"
+              (ionInfinite)="loadPhotos($event)"
+            >
+              <ion-infinite-scroll-content
+                loadingSpinner="dots"
+                loadingText="Caricamento..."
+              >
+              </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div class="back-to-top-btn" *ngIf="backToTop" (click)="gotToTop()">
+    <ion-icon name="chevron-up-outline"></ion-icon>
+  </div>
+</ion-content>

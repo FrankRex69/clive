@@ -1,0 +1,255 @@
+<ion-content>
+  <div class="container ion-no-margin ion-hide-md-up">
+    <div class="backTitle">
+      <ion-button class="btn-trasparent ion-no-padding" (click)="closeModal()">
+        <ion-icon
+          name="chevron-back-outline"
+          size="large"
+          slot="icon-only"
+          class="ion-margin"
+        ></ion-icon>
+      </ion-button>
+      <div>
+        <div class="title">{{ roomName }}</div>
+      </div>
+    </div>
+    <div class="data-container">
+      <div class="coord-btns">
+        <div class="geo-data">
+          {{ foto.longitu }}<br />
+          {{ foto.latitu }}<br />
+        </div>
+        <div class="btns">
+          <ion-button class="btn-trasparent ion-no-padding">
+            <ion-icon class="ion-margin" name="map" slot="start"></ion-icon>
+          </ion-button>
+          <ion-toggle color="success" (click)="mapActivate()"></ion-toggle>
+          <ion-button
+            *ngIf="user?.btnGallDownload == 1"
+            class="btn-trasparent ion-no-padding"
+            (click)="dowloadSinglePhoto()"
+          >
+            <ion-icon
+              class="ion-margin"
+              name="cloud-download"
+              slot="icon-only"
+            ></ion-icon>
+          </ion-button>
+          <ion-button
+            *ngIf="user?.btnGallDel == 1"
+            class="btn-trasparent ion-no-padding"
+            (click)="deleteFoto(foto.idPhoto)"
+          >
+            <ion-icon
+              class="ion-margin"
+              name="trash"
+              slot="icon-only"
+            ></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+
+      <div class="map-mobile" *ngIf="mapDisplay" [@inOutAnimation]>
+        <app-g-maps
+          [lat]="foto.latitu"
+          [lon]="foto.longitu"
+          [nome]="foto.nomelemento"
+        ></app-g-maps>
+      </div>
+
+      <div class="imageModalContainer ion-no-padding" *ngIf="!mapDisplay">
+        <img
+          class="imageModal"
+          [src]="'data:image/jpeg;base64,' + foto.imageBase64 | safeHtml"
+        />
+      </div>
+
+      <div class="info-area">
+        <div *ngIf="!inputArea" class="nome-note">
+          <ion-icon
+            *ngIf="user?.btnGallUpdate == 1"
+            name="pencil"
+            color="light"
+            class="pen-update"
+            (click)="updateOn()"
+          ></ion-icon>
+          <p class="data-bold">Nome:</p>
+          <p class="data-bold dataNome">{{ foto.nomelemento }}</p>
+          <p class="data-bold">
+            {{ foto.dataimg | date: 'dd/MM/yyyy - HH:mm' }}
+          </p>
+          <p class="data-bold">ID:{{ foto.idPhoto }}</p>
+          <p class="data-bold">Nota:</p>
+          <p class="edit">{{ foto.noteimg }}</p>
+        </div>
+
+        <div *ngIf="inputArea" class="nome-note">
+          <ion-icon
+            name="checkmark-sharp"
+            size="large"
+            color="light"
+            class="pen-update"
+            (click)="updateOff()"
+          >
+          </ion-icon>
+          <form [formGroup]="form" class="form ion-padding">
+            <ion-item>
+              <ion-label position="floating"><b>Nome</b></ion-label>
+              <ion-input formControlName="nome" type="text"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating"><b>Note</b></ion-label>
+              <ion-textarea
+                autoGrow="true"
+                formControlName="note"
+                type="text"
+              ></ion-textarea>
+            </ion-item>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESKTOP SOTTO -->
+
+  <div class="ion-hide-md-down">
+    <div class="backTitle-desk">
+      <ion-button
+        class="btn-trasparent ion-no-padding ion-margin"
+        (click)="closeModal()"
+      >
+        <ion-icon
+          name="chevron-back-outline"
+          size="large"
+          slot="icon-only"
+          class="ion-margin"
+        ></ion-icon>
+      </ion-button>
+      <div class="title-desk">
+        <b>Galleria</b>
+      </div>
+    </div>
+    <br />
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" offset="1">
+          <div class="title">{{ roomName }}</div>
+        </ion-col>
+        <ion-button class="btn-trasparent ion-no-padding">
+          <ion-icon
+            class="ion-margin"
+            size="large"
+            name="map"
+            slot="start"
+          ></ion-icon>
+        </ion-button>
+        <ion-toggle color="success" (click)="mapActivate()"></ion-toggle>
+        <ion-col size="6">
+          <div class="btns-desk ion-text-right">
+            <ion-button
+              class="btn-trasparent ion-no-padding"
+              (click)="dowloadSinglePhoto()"
+            >
+              <ion-icon class="ion-margin" name="cloud-download" slot="start"
+                ><a></a
+              ></ion-icon>
+              <ion-label>
+                <p>Scarica</p>
+              </ion-label>
+            </ion-button>
+            <ion-button
+              class="btn-trasparent ion-no-padding"
+              (click)="deleteFoto(foto.idPhoto)"
+            >
+              <ion-icon class="ion-margin" name="trash" slot="start"></ion-icon>
+              <ion-label>
+                <p>Elimina</p>
+              </ion-label>
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="3" offset="1">
+          <div class="info-area-desk">
+            <div *ngIf="!inputArea">
+              <p class="data-thin">
+                {{ foto.dataimg | date: 'dd/MM/yyyy - HH:mm' }}
+              </p>
+              <p class="data-thin ion-no-margin">Coordinate:</p>
+              <p class="data-thin ion-no-margin">{{ foto.longitu }}</p>
+              <p class="data-thin ion-no-margin">{{ foto.latitu }}</p>
+              <br />
+              <p class="data-thin ion-no-margin">ID:{{ foto.idPhoto }}</p>
+              <ion-icon
+                name="pencil"
+                color="dark"
+                class="pen-update-desk"
+                (click)="updateOn()"
+              ></ion-icon>
+              <p class="data-thin">Nome:</p>
+              <p class="data-bold">{{ foto.nomelemento }}</p>
+              <br />
+              <p class="data-thin">Nota:</p>
+              <p class="data-bold">{{ foto.noteimg }}</p>
+            </div>
+
+            <div *ngIf="inputArea">
+              <ion-icon
+                name="checkmark-sharp"
+                color="dark"
+                class="pen-update-desk"
+                (click)="updateOff()"
+              >
+              </ion-icon>
+              <form [formGroup]="form" class="form-desk ion-padding">
+                <ion-item>
+                  <ion-label position="floating"><b>Nome</b></ion-label>
+                  <ion-input formControlName="nome" type="text"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating"><b>Note</b></ion-label>
+                  <ion-textarea
+                    autoGrow="true"
+                    formControlName="note"
+                    type="text"
+                  ></ion-textarea>
+                </ion-item>
+              </form>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col size="7">
+          <div class="image-map-container">
+            <div class="map" *ngIf="mapDisplay" [@inOutAnimation]>
+              <app-g-maps
+                [lat]="foto.latitu"
+                [lon]="foto.longitu"
+                [nome]="foto.nomelemento"
+              ></app-g-maps>
+            </div>
+            <div class="image-desk ion-no-padding" *ngIf="!mapDisplay">
+              <img
+                class="imageAnim"
+                [src]="'data:image/jpeg;base64,' + foto.imageBase64 | safeHtml"
+              />
+            </div>
+            <div
+              class="image-desk ion-no-padding"
+              *ngIf="mapDisplay"
+              [@inAnimation]
+            >
+              <img
+                class="imageAnim"
+                [src]="'data:image/jpeg;base64,' + foto.imageBase64 | safeHtml"
+              />
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

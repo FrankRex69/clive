@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Modifica Commessa</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="form" class="ion-margin">
+    <ion-item>
+      <ion-label position="floating">Nome Utente</ion-label>
+      <ion-input type="text" formControlName="commessa"></ion-input>
+    </ion-item>
+  </form>
+</ion-content>
+<div class="ion-margin-vertical ion-padding">
+  <ion-button
+    color="primary"
+    expand="block"
+    shape="round"
+    (click)="updateCommission()"
+    >Aggiorna Commessa</ion-button
+  >
+</div>

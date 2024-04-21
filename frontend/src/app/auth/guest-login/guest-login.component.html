@@ -1,0 +1,45 @@
+<!-------- INGRESSO GUEST -------->
+<div class="guest-form-container">
+  <form [formGroup]="guestForm" class="form-fields">
+    <div class="user-label">GUEST</div>
+    <ion-item
+      [ngClass]="!guestForm.get('nome').valid && formSubmitted ? 'invalid' : ''"
+    >
+      <ion-label class="smallLabel" position="floating">Nome</ion-label>
+      <ion-input formControlName="nome" type="text"></ion-input>
+    </ion-item>
+    <div *ngIf="!guestForm.get('nome').valid && formSubmitted">
+      <ion-text>Inserire il proprio nome!</ion-text>
+    </div>
+    <ion-item
+      [ngClass]="
+        !guestForm.get('cognome').valid && formSubmitted ? 'invalid' : ''
+      "
+    >
+      <ion-label class="smallLabel" position="floating">Cognome</ion-label>
+      <ion-input
+        formControlName="cognome"
+        type="text"
+        (keyup.enter)="authenticate()"
+      >
+      </ion-input>
+    </ion-item>
+    <div *ngIf="!guestForm.get('cognome').valid && formSubmitted">
+      <ion-text>Inserire il proprio cognome!</ion-text>
+    </div>
+    <!-- <ion-item *ngIf="!pswCtrl.valid && pswCtrl.touched" lines="none">
+                <ion-label>Inserisci una password!</ion-label>
+              </ion-item> -->
+  </form>
+  <div class="form-button">
+    <ion-button type="submit" (click)="authenticate()"
+      ><ion-icon
+        class="arrow"
+        name="arrow-forward-sharp"
+        slot="icon-only"
+      ></ion-icon
+    ></ion-button>
+    <!-- <ion-button type="button" expand="block" fill="clear" (click)="isLogin = !isLogin">Switch to {{isLogin ?
+                  "Sign Up" : "Login"}}</ion-button> -->
+  </div>
+</div>

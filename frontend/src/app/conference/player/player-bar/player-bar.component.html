@@ -1,0 +1,246 @@
+<div
+  [ngClass]="{
+    'player-bar': !fullscreen.isEnabled && !isLandscape,
+    'fullscreen-bar': fullscreen.isEnabled && !isLandscape,
+    'landscape-bar': fullscreen.isEnabled && isLandscape
+  }"
+>
+  <div
+    [ngClass]="{
+      'floating-buttons': !isLandscape,
+      'floating-buttons-landscape': isLandscape
+    }"
+  >
+    <ion-button
+      *ngIf="fullscreen.isEnabled"
+      [ngClass]="{
+        'open-user-list-fullscreen': !isLandscape,
+        'open-user-list-landscape': isLandscape
+      }"
+      class="square-btn white no-margin"
+      (click)="isListOpen = true"
+    >
+      <ion-icon slot="icon-only" name="people-sharp"></ion-icon>
+    </ion-button>
+    <ion-button
+      *ngIf="fullscreen.isEnabled && user?.btnCpt == 1"
+      [ngClass]="{
+        'capture-photo-fullscreen': !isLandscape,
+        'capture-photo-landscape': isLandscape
+      }"
+      class="round-btn dark no-margin"
+      [disabled]="!streamService.isStreaming && !streamService.isPlaying"
+      (click)="capturePhoto.emit()"
+    >
+      <ion-icon
+        slot="icon-only"
+        src="assets/icons/mockup-icons/photo.svg"
+      ></ion-icon>
+    </ion-button>
+    <div
+      [ngClass]="{
+        'board-buttons': !isLandscape,
+        'board-buttons-landscape': isLandscape
+      }"
+      *ngIf="(streamService.isStreaming || streamService.isPlaying) && !isPip"
+    >
+      <div>
+        <ion-button
+          *ngIf="!sbService.isBoardVisible && user?.btnBoard == 1"
+          class="square-btn white no-margin"
+          (click)="openBoard.emit()"
+        >
+          <ion-icon
+            slot="icon-only"
+            src="assets/icons/mockup-icons/board.svg"
+          ></ion-icon>
+        </ion-button>
+        <ion-button
+          class="square-btn white no-margin"
+          *ngIf="sbService.isBoardVisible"
+          (click)="closeBoard.emit()"
+        >
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </div>
+      <div>
+        <ion-button
+          *ngIf="sbService.isBoardVisible"
+          class="square-btn white no-margin"
+          (click)="clearCanvasBoard.emit()"
+        >
+          <ion-icon
+            slot="icon-only"
+            src="assets/icons/mockup-icons/delete.svg"
+          ></ion-icon>
+        </ion-button>
+      </div>
+      <div class="color-menu" [hidden]="!sbService.isBoardVisible">
+        <ion-radio-group [(ngModel)]="sbService.selectedColor">
+          <div
+            *ngFor="let color of sbService.colors"
+            tappable
+            (click)="selectColor.emit(color)"
+            class="color-block"
+          >
+            <ion-radio
+              [style.background]="color"
+              [value]="color"
+              color="dark"
+            ></ion-radio>
+          </div>
+        </ion-radio-group>
+      </div>
+    </div>
+    <div
+      *ngIf="fullscreen.isEnabled && isListOpen"
+      [ngClass]="{
+        'users-list': !isLandscape,
+        'users-list-landscape': isLandscape
+      }"
+    >
+      <app-users-list class="no-scroll" [isListOpen]="true"></app-users-list>
+      <ion-button
+        class="square-btn clear no-margin"
+        [ngStyle]="{ 'align-self': isLandscape ? 'flex-end' : 'flex-start' }"
+        (click)="isListOpen = false"
+      >
+        <ion-icon slot="icon-only" name="chevron-down-sharp"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+  <div
+    [ngClass]="{
+      'top-bar': !isLandscape || !fullscreen.isEnabled,
+      'top-bar-landscape': isLandscape && fullscreen.isEnabled
+    }"
+  >
+    <div>
+      <ion-button
+        class="square-btn clear no-margin"
+        (click)="toggleAudio.emit()"
+      >
+        <ion-icon
+          *ngIf="audioService.isJoined"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/audio-ON.svg"
+        >
+        </ion-icon>
+        <ion-icon
+          *ngIf="!audioService.isJoined"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/audio-OFF.svg"
+        ></ion-icon>
+      </ion-button>
+      <ion-button
+        [disabled]="!audioService.isJoined"
+        class="square-btn clear no-margin"
+        (click)="toggleMic.emit()"
+      >
+        <ion-icon
+          *ngIf="audioService.isMicOn"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/mic-ON.svg"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="!audioService.isMicOn"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/mic-OFF.svg"
+        ></ion-icon>
+      </ion-button>
+    </div>
+    <div>
+      <ion-button
+        *ngIf="user?.btnStream == 1"
+        class="square-btn clear no-margin"
+        [disabled]="streamService.isLoading"
+        (click)="toggleStreaming.emit()"
+      >
+        <ion-icon
+          *ngIf="streamService.isStreaming"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/cam-ON.svg"
+        >
+        </ion-icon>
+        <ion-icon
+          *ngIf="!streamService.isStreaming"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/cam-OFF.svg"
+        >
+        </ion-icon>
+      </ion-button>
+    </div>
+    <div>
+      <ion-button
+        class="square-btn clear no-margin"
+        (click)="openSettings.emit()"
+      >
+        <ion-icon slot="icon-only" name="settings-sharp"></ion-icon>
+      </ion-button>
+      <ion-button
+        class="square-btn clear no-margin"
+        (click)="toggleFullscreen.emit()"
+      >
+        <ion-icon
+          *ngIf="!fullscreen.isEnabled"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/expand.svg"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="fullscreen.isEnabled"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/contract.svg"
+        ></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+  <div *ngIf="!fullscreen.isEnabled" class="bottom-bar">
+    <ion-button
+      *ngIf="user?.btnStream == 1"
+      color="secondary"
+      class="square-btn clear no-margin"
+      [disabled]="streamService.isLoading"
+      (click)="generateQrCode.emit()"
+    >
+      <ion-icon
+        slot="icon-only"
+        src="assets/icons/mockup-icons/smart-glasses.svg"
+      ></ion-icon>
+    </ion-button>
+    <ion-button
+      *ngIf="user?.btnCpt == 1"
+      class="square-btn clear no-margin"
+      [disabled]="!streamService.isStreaming && !streamService.isPlaying"
+      (click)="capturePhoto.emit()"
+    >
+      <ion-icon
+        slot="icon-only"
+        src="assets/icons/mockup-icons/photo.svg"
+      ></ion-icon>
+    </ion-button>
+    <div class="ion-hide-md-down">
+      <ion-button class="square-btn fake no-margin" disabled></ion-button>
+    </div>
+    <div class="ion-hide-md-up">
+      <ion-button
+        [disabled]="streamService.isLoading || streamService.isPlaying"
+        class="square-btn clear no-margin"
+        [ngClass]="{ active: gpsService.isGpsOn }"
+        (click)="toggleGps.emit()"
+      >
+        <ion-icon
+          *ngIf="gpsService.isGpsOn"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/gps-ON.svg"
+        >
+        </ion-icon>
+        <ion-icon
+          *ngIf="!gpsService.isGpsOn"
+          slot="icon-only"
+          src="assets/icons/mockup-icons/gps-OFF.svg"
+        >
+        </ion-icon>
+      </ion-button>
+    </div>
+  </div>
+</div>

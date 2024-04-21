@@ -1,0 +1,99 @@
+<div
+  *ngIf="!isListOpen"
+  class="user-icons-container no-scroll"
+  [ngClass]="fullscreen.isEnabled ? 'icons-vertical' : 'icons-horizontal'"
+>
+  <div *ngFor="let user of roomUsers$ | async">
+    <div *ngIf="!user?.idutente?.includes('glasses')" class="user avatar">
+      <ion-text>{{ user?.initials | uppercase }}</ion-text>
+    </div>
+    <div *ngIf="user?.idutente?.includes('glasses')" class="glasses avatar">
+      <ion-icon
+        slot="icon-only"
+        src="assets/icons/mockup-icons/smart-glasses.svg"
+      ></ion-icon>
+    </div>
+  </div>
+  <!-- <div *ngFor="let item of list">
+    <div class="user avatar">{{ item }}</div>
+  </div> -->
+</div>
+<ion-list
+  *ngIf="isListOpen"
+  class="user-list-container no-scroll"
+  [ngClass]="{
+    'list-android-web':
+      platform.is('android') &&
+      platform.is('mobileweb') &&
+      !fullscreen.isEnabled,
+    'list-android-native':
+      platform.is('android') &&
+      (platform.is('capacitor') || platform.is('cordova')) &&
+      !fullscreen.isEnabled,
+    'list-ios-web':
+      platform.is('ios') && platform.is('mobileweb') && !fullscreen.isEnabled,
+    'list-ios-native':
+      platform.is('ios') &&
+      (platform.is('capacitor') || platform.is('cordova')) &&
+      !fullscreen.isEnabled
+  }"
+>
+  <ion-item *ngFor="let user of roomUsers$ | async">
+    <div *ngIf="!user?.idutente?.includes('glasses')" class="user avatar">
+      <ion-text>{{ user?.initials | uppercase }}</ion-text>
+    </div>
+    <div *ngIf="user?.idutente?.includes('glasses')" class="glasses avatar">
+      <ion-icon
+        slot="icon-only"
+        src="assets/icons/mockup-icons/smart-glasses.svg"
+      ></ion-icon>
+    </div>
+    <ion-label style="margin-left: 10px">
+      <h2>{{ user?.nome }}</h2>
+      <p>{{ user?.idutente }}</p>
+    </ion-label>
+    <div class="icons">
+      <div class="icon" *ngIf="!user?.audioOn">
+        <ion-icon
+          size="small"
+          color="medium"
+          src="assets/icons/mockup-icons/audio-OFF.svg"
+        >
+        </ion-icon>
+      </div>
+
+      <div class="icon" *ngIf="user?.stream">
+        <ion-icon
+          size="small"
+          color="primary"
+          src="assets/icons/mockup-icons/cam-ON.svg"
+        ></ion-icon>
+      </div>
+
+      <div class="icon" *ngIf="user?.audioOn">
+        <ion-icon
+          size="small"
+          *ngIf="!user?.micOn"
+          color="primary"
+          src="assets/icons/mockup-icons/mic-OFF.svg"
+        ></ion-icon>
+        <ion-icon
+          size="small"
+          *ngIf="user?.micOn"
+          color="primary"
+          src="assets/icons/mockup-icons/mic-ON.svg"
+        ></ion-icon>
+      </div>
+    </div>
+    <audio
+      #audio
+      *ngIf="user?.audioOn"
+      [srcObject]="user?.audioStream"
+      autoplay
+      playsinline
+    ></audio>
+  </ion-item>
+  <!-- <div *ngFor="let item of list">
+    <div class="user avatar">{{ item }}</div>
+  </div> -->
+</ion-list>

@@ -1,0 +1,38 @@
+<div *ngIf="inputDatas$ | async as datas">
+  <!-- <div class="ion-text-center" *ngIf="datas.length <= 0">
+    <ion-spinner></ion-spinner>
+  </div> -->
+  <ion-row *ngFor="let data of datas">
+    <ion-col>
+      <!-- <ion-item-sliding #item>
+        <ion-item detail>
+          <ion-label class="ion-margin-end">
+            <ion-text color="dark">
+              <h2><b>{{ data[fields[0].key] }}</b></h2>
+            </ion-text>
+            <ion-text color="medium">
+              <p>{{ fields[1].type === 'date' ? (data[fields[1].key] | date:'dd/MM/yy') : data[fields[1].key] }}
+                - {{ data[fields[2].key] }}
+                - {{ data[fields[3].key] }}</p>
+            </ion-text>
+          </ion-label> -->
+      <!-- <div>
+              <ion-button class="round-button" shape="round" fill="outline" (click)="downloadFoto(slidingItem)">
+                  <ion-icon name="cloud-download-outline" slot="icon-only" size="large"></ion-icon>
+              </ion-button>
+              <ion-button class="round-button" shape="round" fill="solid" (click)="enterRoom()">
+                  <ion-icon name="chevron-forward" slot="icon-only" size="large"></ion-icon>
+              </ion-button>
+          </div> -->
+      <!-- </ion-item> -->
+      <ng-container
+        *ngTemplateOutlet="
+          mobileItem ? mobileItem : null;
+          context: { data: data }
+        "
+      >
+      </ng-container>
+      <!-- </ion-item-sliding> -->
+    </ion-col>
+  </ion-row>
+</div>

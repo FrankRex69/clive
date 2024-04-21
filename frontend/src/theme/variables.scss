@@ -1,0 +1,120 @@
+:root {
+  --ion-color-primary: #03477e;
+  --ion-color-primary-rgb: 3, 71, 126;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #033e6f;
+  --ion-color-primary-tint: #1c598b;
+
+  --ion-color-secondary: #4590bf;
+  --ion-color-secondary-rgb: 69, 144, 191;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #3d7fa8;
+  --ion-color-secondary-tint: #589bc5;
+
+  --ion-color-tertiary: #f1f9ff;
+  --ion-color-tertiary-rgb: 241, 249, 255;
+  --ion-color-tertiary-contrast: var(--ion-color-primary);
+  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
+  --ion-color-tertiary-shade: #d4dbe0;
+  --ion-color-tertiary-tint: #f2faff;
+
+  --ion-color-success: #34e179;
+  --ion-color-success-rgb: 52, 225, 121;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+  --ion-color-success-shade: #3a7552;
+  --ion-color-success-tint: #48e486;
+
+  --ion-color-warning: #f7e436;
+  --ion-color-warning-rgb: 247, 228, 54;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #d9c930;
+  --ion-color-warning-tint: #f8e74a;
+
+  --ion-color-danger: #ff4733;
+  --ion-color-danger-rgb: 255, 71, 51;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #e03e2d;
+  --ion-color-danger-tint: #ff5947;
+
+  --ion-color-dark: #444546;
+  --ion-color-dark-rgb: 68, 69, 70;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #3c3d3e;
+  --ion-color-dark-tint: #575859;
+
+  --ion-color-medium: #858788;
+  --ion-color-medium-rgb: 133, 135, 136;
+  --ion-color-medium-contrast: #000000;
+  --ion-color-medium-contrast-rgb: 0, 0, 0;
+  --ion-color-medium-shade: #757778;
+  --ion-color-medium-tint: #919394;
+
+  --ion-color-light: #eff2f3;
+  --ion-color-light-rgb: 239, 242, 243;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #d2d5d6;
+  --ion-color-light-tint: #f1f3f4;
+
+  --ion-font-family: 'Montserrat';
+}
+@font-face {
+  font-family: 'Montserrat'; //valore da chiamare nel CSS
+  font-style: normal;
+  font-weight: 100;
+  src: url('../assets/fonts/Montserrat-Thin.ttf');
+}
+@font-face {
+  font-family: 'Montserrat'; //valore da chiamare nel CSS
+  font-style: normal;
+  font-weight: 200;
+  src: url('../assets/fonts/Montserrat-ExtraLight.ttf');
+}
+@font-face {
+  font-family: 'Montserrat'; //valore da chiamare nel CSS
+  font-style: normal;
+  font-weight: 300;
+  src: url('../assets/fonts/Montserrat-Light.ttf');
+}
+@font-face {
+  font-family: 'Montserrat'; //valore da chiamare nel CSS
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/Montserrat-Regular.ttf');
+}
+@font-face {
+  font-family: 'Montserrat'; //valore da chiamare nel CSS
+  font-style: normal;
+  font-weight: 500;
+  src: url('../assets/fonts/Montserrat-Medium.ttf');
+}
+@font-face {
+  font-family: 'Montserrat'; //valore da chiamare nel CSS
+  font-style: normal;
+  font-weight: 600;
+  src: url('../assets/fonts/Montserrat-SemiBold.ttf');
+}
+@font-face {
+  font-family: 'Montserrat'; //valore da chiamare nel CSS
+  font-style: normal;
+  font-weight: 700;
+  src: url('../assets/fonts/Montserrat-Bold.ttf');
+}
+@font-face {
+  font-family: 'Montserrat'; //valore da chiamare nel CSS
+  font-style: normal;
+  font-weight: 800;
+  src: url('../assets/fonts/Montserrat-ExtraBold.ttf');
+}
+@font-face {
+  font-family: 'Montserrat'; //valore da chiamare nel CSS
+  font-style: normal;
+  font-weight: 900;
+  src: url('../assets/fonts/Montserrat-Black.ttf');
+}

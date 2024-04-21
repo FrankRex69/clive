@@ -1,0 +1,37 @@
+<!-------- INGRESSO USER -------->
+<div class="login-form-container">
+  <form [formGroup]="loginForm" class="form-fields">
+    <div class="user-label">USER</div>
+    <ion-item [ngClass]="
+        !loginForm.get('username').valid && formSubmitted ? 'invalid' : ''
+      ">
+      <ion-label class="smallLabel" position="floating">Nome Utente</ion-label>
+      <ion-input formControlName="username" type="text"></ion-input>
+    </ion-item>
+    <div *ngIf="!loginForm.get('username').valid && formSubmitted">
+      <ion-text>Inserire un nome utente!</ion-text>
+    </div>
+    <ion-item [ngClass]="
+        !loginForm.get('password').valid && formSubmitted ? 'invalid' : ''
+      ">
+      <ion-label class="smallLabel" position="floating">Password</ion-label>
+      <ion-input formControlName="password" [type]="showPassword ? 'text' : 'password'" (keyup.enter)="authenticate()">
+      </ion-input>
+      <ion-icon class="show-password" [name]="showPassword ? 'eye-outline' : 'eye-off-outline'" slot="end"
+        (click)="toggleShowPassword()"></ion-icon>
+    </ion-item>
+    <div *ngIf="!loginForm.get('password').valid && formSubmitted">
+      <ion-text>Inserire una password!</ion-text>
+    </div>
+    <!-- <ion-item *ngIf="!pswCtrl.valid && pswCtrl.touched" lines="none">
+                <ion-label>Inserisci una password!</ion-label>
+              </ion-item> -->
+  </form>
+  <div class="form-button">
+    <ion-button type="submit" (click)="authenticate()">
+      <ion-icon class="arrow" name="arrow-forward-sharp" slot="icon-only"></ion-icon>
+    </ion-button>
+    <!-- <ion-button type="button" expand="block" fill="clear" (click)="isLogin = !isLogin">Switch to {{isLogin ?
+                  "Sign Up" : "Login"}}</ion-button> -->
+  </div>
+</div>

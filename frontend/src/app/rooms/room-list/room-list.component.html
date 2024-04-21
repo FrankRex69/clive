@@ -1,0 +1,58 @@
+<!-- Searchbar  -->
+<div class="searchbarAdd">
+  <ion-searchbar
+    class="search-bar"
+    (ionInput)="searchStream$.next($event.target.value)"
+  ></ion-searchbar>
+  <!-- Create Room Button -->
+  <ion-button
+    *ifRoleIs="['ADMIN']"
+    color="secondary"
+    (click)="this.roomFunctions.createRoom()"
+  >
+    <ion-icon name="add" slot="icon-only"></ion-icon>
+  </ion-button>
+</div>
+
+<!-- Desktop -->
+<div class="ion-hide-md-down">
+  <!-- Refresh -->
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="this.roomFunctions.doRefresh($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!-- Rooms Table -->
+  <app-generic-table
+    [inputDatas$]="rooms$"
+    [columns]="columns"
+    [desktopItem]="desktopItem"
+  >
+    <ng-template #desktopItem let-data="data">
+      <!-- Rooms Table Item -->
+      <app-room-item-desktop
+        [room]="data"
+        [columns]="columns"
+      ></app-room-item-desktop>
+    </ng-template>
+  </app-generic-table>
+</div>
+
+<!-- Mobile -->
+<div class="ion-hide-md-up">
+  <!-- Refresh -->
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="this.roomFunctions.doRefresh($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!-- Rooms List -->
+  <app-generic-list [inputDatas$]="rooms$" [mobileItem]="mobileItem">
+    <ng-template #mobileItem let-data="data">
+      <!-- Rooms List Item -->
+      <app-room-item-mobile [room]="data"></app-room-item-mobile>
+    </ng-template>
+  </app-generic-list>
+</div>

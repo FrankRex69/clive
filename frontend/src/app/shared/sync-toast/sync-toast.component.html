@@ -1,0 +1,31 @@
+<div id="snackbar" [ngClass]="showToast ? 'fadein' : ''">
+  <div class="title">Sincronizzazione progetto {{ sync?.pk }}</div>
+  <div>
+    {{ sync?.startDate | date: 'hh:mm:ss' }} - {{ sync?.status }}
+    <br />
+    {{ sync?.lastCheckDate | date: 'hh:mm:ss' }} - Check: {{ sync?.check }} ({{
+      this.syncService.TOTAL_CHECKS
+    }}
+    max)
+    <div
+      #bar
+      id="time-bar"
+      data-style="smooth"
+      style="--duration: {{ this.syncService.CHECK_INTERVAL / 1000 }};"
+    >
+      <div></div>
+    </div>
+  </div>
+  <div *ngIf="sync?.status == this.syncService.STATUS_ERRORE_RICHIESTA">
+    <div>Errore durante la richiesta: controlla i dati immessi</div>
+    <ion-button (click)="closeToast()">Chiudi</ion-button>
+  </div>
+  <div *ngIf="sync?.status == this.syncService.STATUS_ERRORE_TIMEOUT">
+    <div>Timeout richiesta: contatta l'assistenza</div>
+    <ion-button (click)="closeToast()">Chiudi</ion-button>
+  </div>
+  <div *ngIf="sync?.status == this.syncService.STATUS_COMPLETATA">
+    <div>Ricarica i dati per completare l'aggiornamento</div>
+    <ion-button (click)="reloadData()">Ricarica</ion-button>
+  </div>
+</div>

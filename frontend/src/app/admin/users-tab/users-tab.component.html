@@ -1,0 +1,48 @@
+<!-- Searchbar -->
+<div class="searchbarAdd">
+  <ion-searchbar
+    class="search-bar"
+    (ionInput)="searchStream$.next($event.target.value)"
+  ></ion-searchbar>
+  <!-- Create User Button -->
+  <ion-button color="secondary" (click)="createUser()">
+    <ion-icon name="add" slot="icon-only"></ion-icon>
+  </ion-button>
+</div>
+
+<!-- Desktop -->
+<ion-content class="ion-hide-md-down">
+  <!-- Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!-- Users Table -->
+  <app-generic-table
+    [inputDatas$]="users$"
+    [columns]="columns"
+    [desktopItem]="desktopItem"
+  >
+    <ng-template #desktopItem let-data="data">
+      <!-- Users Table Item -->
+      <app-users-table-item
+        [user]="data"
+        [columns]="columns"
+      ></app-users-table-item>
+    </ng-template>
+  </app-generic-table>
+</ion-content>
+
+<!-- Mobile -->
+<ion-content class="ion-hide-md-up">
+  <!-- Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!-- Users List -->
+  <app-generic-list [inputDatas$]="users$" [mobileItem]="mobileItem">
+    <ng-template #mobileItem let-data="data">
+      <!-- Users List Item -->
+      <app-users-list-item [user]="data"></app-users-list-item>
+    </ng-template>
+  </app-generic-list>
+</ion-content>

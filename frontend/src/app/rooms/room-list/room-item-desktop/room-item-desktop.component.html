@@ -1,0 +1,74 @@
+<ion-row class="ion-align-items-center row-data">
+  <ion-col class="col-item" *ngFor="let col of columns" [size]="col.size">
+    <div *ngIf="col.type !== 'buttons'" class="data-item">
+      {{
+        col.type === 'date' ? (room[col.key] | date: 'dd/MM/yy') : room[col.key]
+      }}
+    </div>
+    <div *ngIf="col.type === 'buttons'" class="btns">
+      <span data-tooltip="Copia Link" data-tooltip-position="top">
+        <ion-button
+          size="small"
+          class="ion-no-margin"
+          expand="block"
+          fill="clear"
+          (click)="this.roomFunctions.copyLink(room)"
+        >
+          <ion-icon name="copy-outline"></ion-icon>
+        </ion-button>
+      </span>
+      <span
+        data-tooltip="Modifica"
+        data-tooltip-position="top"
+        *ifRoleIs="['ADMIN']"
+      >
+        <ion-button
+          size="small"
+          class="ion-no-margin"
+          expand="block"
+          fill="clear"
+          (click)="this.roomFunctions.editRoom(room)"
+        >
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </span>
+      <span
+        data-tooltip="Elimina"
+        data-tooltip-position="top"
+        *ifRoleIs="['ADMIN']"
+      >
+        <ion-button
+          size="small"
+          class="ion-no-margin"
+          expand="block"
+          fill="clear"
+          (click)="this.roomFunctions.deleteRoom(room)"
+        >
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </span>
+      <span data-tooltip="Media" data-tooltip-position="top">
+        <ion-button
+          size="small"
+          class="ion-no-margin"
+          expand="block"
+          fill="clear"
+          (click)="this.roomFunctions.openMedia(room.id, room.progetto)"
+        >
+          <ion-icon name="images-outline"></ion-icon>
+        </ion-button>
+      </span>
+      <span data-tooltip="Entra nella Room" data-tooltip-position="top">
+        <ion-button
+          size="small"
+          class="ion-no-margin"
+          expand="block"
+          fill="clear"
+          (click)="this.roomFunctions.enterRoom(room)"
+        >
+          <ion-icon name="enter-outline"></ion-icon>
+        </ion-button>
+      </span>
+    </div>
+  </ion-col>
+</ion-row>

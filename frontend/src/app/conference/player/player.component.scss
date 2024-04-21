@@ -1,0 +1,224 @@
+.player-and-users-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.player-fullscreen {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 200000;
+  min-width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+}
+
+.player-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Mobile --> lg-down */
+@media only screen and (max-width: 992px) {
+  .player-container {
+    padding: 12px 16px;
+  }
+}
+/* Desktop --> lg-up */
+@media only screen and (min-width: 992px) {
+  .player-container {
+    padding: 0px;
+  }
+}
+
+.map-and-label {
+  position: absolute;
+  margin: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  z-index: 9;
+  align-items: center;
+  .label {
+    background-color: white;
+    border-radius: 50px;
+    opacity: 60%;
+    height: fit-content;
+    padding: 6px 12px 6px 12px;
+    ion-text {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ion-color-dark);
+      ion-icon {
+        color: var(--ion-color-danger-tint);
+        padding-left: 8px;
+        scale: 1;
+        animation: circle-scale 1s infinite;
+      }
+    }
+  }
+}
+
+.video-container {
+  // position: relative;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-fullscreen {
+  height: 100vh;
+  width: 100vw;
+}
+.video-desktop-web {
+  width: 100%;
+  max-height: calc(100vh - 260px); /* Web */
+}
+.video-android-web {
+  width: 100%;
+  max-height: calc(100vh - 338px); /* Android +56px navbar Chrome */
+}
+.video-android-native {
+  width: 100%;
+  max-height: calc(100vh - 282px); /* Android */
+}
+.video-ios-web {
+  width: 100%;
+  max-height: calc(100vh - 306px); /* iOS +44px navbar Chrome */
+}
+.video-ios-native {
+  width: 100%;
+  max-height: calc(100vh - 262px); /* iOS - da testare */
+}
+
+.canvasEvideo {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  &.portrait {
+    height: 100%;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+  }
+  video {
+    height: 100%;
+    width: 100%;
+  }
+  app-shared-board {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+}
+
+.canvasEvideo-pip {
+  position: absolute;
+  background-color: black;
+  top: 74px;
+  left: 16px;
+  z-index: 1;
+  video {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+/* Mobile --> lg-down */
+@media only screen and (max-width: 992px) {
+  .canvasEvideo-pip {
+    height: calc(200px * 0.56);
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.portrait {
+      height: 200px;
+      width: calc(200px * 0.56);
+    }
+  }
+}
+/* Desktop --> lg-up */
+@media only screen and (min-width: 992px) {
+  .canvasEvideo-pip {
+    height: calc(25vw * 0.56);
+    width: 25vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.portrait {
+      height: 25vh;
+      width: calc(25vh * 0.56);
+    }
+  }
+}
+
+app-map {
+  height: 100%;
+  width: 100%;
+}
+
+.users-list {
+  background-color: var(--ion-color-light-tint);
+  display: flex;
+  z-index: 10;
+  /* TODO */
+  // position: absolute;
+  // bottom: 0;
+}
+.list-open {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px 16px;
+  app-users-list {
+    width: 100%;
+    overflow-y: scroll;
+  }
+}
+.list-closed {
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px 16px;
+}
+
+.list-fullscreen {
+  flex-direction: column;
+  position: fixed;
+  right: 0;
+  top: 0;
+  margin: 25vh 0px;
+  padding: 6px;
+  gap: 6px;
+  z-index: 1;
+}
+
+@keyframes circle-scale {
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

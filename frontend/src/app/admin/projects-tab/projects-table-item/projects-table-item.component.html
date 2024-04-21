@@ -1,0 +1,60 @@
+<ion-row class="ion-align-items-center row-data">
+  <ion-col *ngFor="let col of columns" [size]="col.size">
+    <div *ngIf="col.type !== 'buttons'" class="data-item">
+      <ion-icon
+        *ngIf="col.key === 'sync'"
+        name="ellipse-sharp"
+        [color]="proj[col.key] === 'auto' ? 'success' : 'warning'"
+      ></ion-icon>
+      {{
+        col.type === 'date' ? (proj[col.key] | date: 'dd/MM/yy') : proj[col.key]
+      }}
+    </div>
+    <div *ngIf="col.type === 'buttons'" class="btns">
+      <span data-tooltip="Aggiorna" data-tooltip-position="top">
+        <ion-button
+          size="small"
+          class="ion-no-margin"
+          expand="block"
+          fill="clear"
+          (click)="syncProjectUpdate()"
+        >
+          <ion-icon name="refresh-outline"></ion-icon>
+        </ion-button>
+      </span>
+      <span data-tooltip="NPerf" data-tooltip-position="top">
+        <ion-button
+          size="small"
+          class="ion-no-margin"
+          expand="block"
+          fill="clear"
+          (click)="createLinkNPerf()"
+        >
+          <ion-icon name="globe-outline"></ion-icon>
+        </ion-button>
+      </span>
+      <span data-tooltip="Modifica" data-tooltip-position="top">
+        <ion-button
+          size="small"
+          class="ion-no-margin"
+          expand="block"
+          fill="clear"
+          (click)="editProject()"
+        >
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </span>
+      <span data-tooltip="Elimina" data-tooltip-position="top">
+        <ion-button
+          size="small"
+          class="ion-no-margin"
+          expand="block"
+          fill="clear"
+          (click)="deleteProject()"
+        >
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </span>
+    </div>
+  </ion-col>
+</ion-row>

@@ -1,0 +1,70 @@
+<ion-menu
+  #menu
+  contentId="main"
+  swipeGesture="false"
+  side="end"
+  (ionWillOpen)="refreshMenu()"
+>
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-menu-toggle auto-hide="false" class="ion-padding-end">
+          <ion-button>
+            <ion-icon slot="icon-only" name="close-sharp"></ion-icon>
+          </ion-button>
+        </ion-menu-toggle>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <div class="container">
+      <ion-item-group class="app-menu">
+        <!-- <ion-item-divider>
+          <ion-label> App </ion-label>
+        </ion-item-divider> -->
+        <ion-menu-toggle auto-hide="false">
+          <ion-item lines="none" button="true" routerLink="/rooms">
+            <ion-text>Rooms</ion-text>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false" *ifRoleIs="['ADMIN']">
+          <ion-item lines="none" button="true" routerLink="/admin">
+            <ion-text>Backoffice</ion-text>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-item-group>
+      <!-- <ion-item-group *ngIf="currentRoom as room">
+          <ion-item-divider>
+            <ion-label> Room </ion-label>
+          </ion-item-divider>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item
+              lines="none"
+              button="true"
+              routerLink="/gallery/{{ room.id }}/{{ room.progetto }}"
+            >
+              <ion-text>Galleria</ion-text>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-item-group> -->
+      <ion-item-group class="user-menu">
+        <ion-item-divider>
+          <ion-label slot="end"
+            ><div *ngIf="currentUser as user">
+              <h2>{{ user.nomecognome }}</h2>
+              <p>Username: {{ user.username }}</p>
+              <p>Commessa: {{ user.commessa }}</p>
+              <p>Autorizzazione: {{ user.autorizzazione }}</p>
+              <p>ID Utente: {{ user.idutcas }}</p>
+            </div>
+          </ion-label>
+        </ion-item-divider>
+        <ion-menu-toggle auto-hide="false">
+          <ion-item lines="none" button="true" (click)="onLogout()">
+            <ion-text slot="end">Logout</ion-text>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-item-group>
+    </div>
+  </ion-content>
+</ion-menu>

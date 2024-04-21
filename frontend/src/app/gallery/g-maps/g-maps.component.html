@@ -1,0 +1,7 @@
+<agm-map [zoom]="18" [latitude]="+lat" [longitude]="+lon">
+  <agm-map-type-control></agm-map-type-control>
+  <agm-fullscreen-control></agm-fullscreen-control>
+  <agm-marker [latitude]="+lat" [longitude]="+lon">
+    <agm-info-window>{{ nome }}</agm-info-window>
+  </agm-marker>
+</agm-map>

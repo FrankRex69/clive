@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Carica SHP</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="form" class="ion-padding">
+    <dropdown-item
+      formControlName="collaudatoreufficio"
+      [key]="'collaudatoreufficio'"
+      [title]="'Collaudatore'"
+      [inputObs$]="this.userService.users$"
+      (event)="selectedUser = $event"
+    >
+    </dropdown-item>
+
+    <ion-item>
+      <ion-label position="stacked" class="ion-margin">Commessa</ion-label>
+      <ion-input color="medium" disabled="true" type="text">{{
+        selectedUser?.commessa
+      }}</ion-input>
+      <ion-icon
+        size="small"
+        name="lock-closed-outline"
+        slot="end"
+        class="ion-align-self-center"
+      ></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Località</ion-label>
+      <ion-input type="text" formControlName="nome"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Connessione OPTA-Civici</ion-label>
+      <ion-input type="text" formControlName="conn_edif_opta"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nodi Fisici</ion-label>
+      <ion-input type="text" formControlName="nodi_fisici"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nodi Ottici</ion-label>
+      <ion-input type="text" formControlName="nodi_ottici"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Tratte</ion-label>
+      <ion-input type="text" formControlName="tratte"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Coordinate</ion-label>
+      <ion-input type="text" formControlName="coordinate"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">PK Project</ion-label>
+      <ion-input type="text" formControlName="pk_proj"></ion-input>
+    </ion-item>
+  </form>
+</ion-content>
+<div class="ion-margin-vertical ion-padding">
+  <ion-button
+    color="primary"
+    expand="block"
+    shape="round"
+    (click)="createProject()"
+    >Crea Progetto</ion-button
+  >
+</div>

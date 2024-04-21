@@ -1,0 +1,81 @@
+<div class="ion-padding">
+  <ion-row class="head-menu ion-padding-horizontal">
+    <ion-col
+      class="head-table-menu"
+      *ngFor="let col of columns"
+      [size]="col.size"
+      >{{ col.title }}
+      <app-order-by-button
+        *ngIf="col.orderEnabled"
+        (event)="sortBy(col, $event)"
+      ></app-order-by-button>
+    </ion-col>
+  </ion-row>
+  <div *ngIf="datas$ | async as datas" class="ion-padding-horizontal">
+    <div class="ion-text-center ion-padding-vertical" *ngIf="datas.length <= 0">
+      <!-- <ion-spinner></ion-spinner> -->
+      Nessun dato disponibile.
+    </div>
+    <div *ngFor="let data of datas">
+      <!-- <ion-row class="ion-align-items-center row-data" *ngFor="let data of datas"> -->
+      <!-- <ion-col class="data-item" *ngFor="let col of columns" [size]="col.size"> -->
+      <!-- <div>{{ col.type === 'date' ? (data[col.key] | date:'dd/MM/yy') : data[col.key] }} -->
+      <ng-container
+        *ngTemplateOutlet="
+          desktopItem ? desktopItem : null;
+          context: { data: data }
+        "
+      >
+      </ng-container>
+      <!-- </div> -->
+      <!-- </ion-col> -->
+      <!-- </ion-row> -->
+    </div>
+  </div>
+  <ion-row class="footer">
+    <ion-col size="1" class="page-btn" offset="3">
+      <ion-button fill="clear" (click)="goFirst()">
+        <ion-icon
+          color="primary"
+          size="small"
+          name="play-back"
+          slot="icon-only"
+        ></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="1" class="page-btn">
+      <ion-button fill="clear" (click)="prevPage()">
+        <ion-icon
+          color="primary"
+          size="small"
+          name="chevron-back"
+          slot="icon-only"
+        ></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="2" class="page-btn-number ion-margin-vertical">
+      <div>{{ page + 1 }} of {{ totalPages }}</div>
+    </ion-col>
+    <ion-col size="1" class="page-btn">
+      <ion-button fill="clear" (click)="nextPage()">
+        <ion-icon
+          color="primary"
+          size="small"
+          name="chevron-forward"
+          slot="icon-only"
+        ></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="1" class="page-btn">
+      <ion-button fill="clear" (click)="goLast()">
+        <ion-icon
+          color="primary"
+          size="small"
+          name="play-forward"
+          slot="icon-only"
+        ></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <!-- <app-pagination [totalPages]="totalPages" [page]="page" (event)="loadPage($event)"></app-pagination> -->
+</div>

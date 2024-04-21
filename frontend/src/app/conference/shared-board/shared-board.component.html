@@ -1,0 +1,48 @@
+<div #container class="board-container">
+
+  <div class="row">
+    <div class="box-sh primaryCanvas">
+      <canvas #imageCanvas (mousedown)="startDrawing($event)" (touchstart)="startDrawing($event)"
+        (mousemove)="moved($event)" (touchmove)="moved($event)" (mouseup)="endDrawing($event)"
+        (touchend)="endDrawing($event)">
+        Sorry, Your Browser don't support canvas of Html5.
+      </canvas>
+      <!-- <div class="boxMenu">
+        <div class="ctl-row" id="colors">
+          <span class="text-blue fl" style="margin: 3px;padding-right: 2px; font-size: 8px;">Colori</span>
+        </div>
+        <div class="ctl-row">
+          <span class="text-blue fl" style="margin: 3px;padding-right: 2px; font-size: 8px;">Spessore</span>
+          <input id="ranger" type="range" orient="vertical" value="1" min="1" step="1" max="10" />
+          <span style="text-align: center; font-size: 8px;">1</span>
+
+          <div class="fr">
+
+            <a class="btn btn-blue" href="javascript:socket.emit('remove paint');">Cancella</a>
+          </div>
+          <div style="clear: both;"></div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+  <!--   <div class="colorMenu">
+
+    <ion-radio-group [(ngModel)]="selectedColor">
+      <ion-row>
+        <ion-col *ngFor="let color of colors" tappable (click)="selectColor(color)" class="color-block">
+          <ion-radio [style.background]="color" [value]="color" color="dark"></ion-radio>
+        </ion-col>
+      </ion-row>
+    </ion-radio-group>
+
+  </div> -->
+  <!-- ******************* LINE WIDTH ********************** -->
+  <!--   <div class="lineWidthRange">
+    <ion-range min="2" max="10" color="light" [(ngModel)]="lineWidth">
+      <ion-icon size="small" slot="start" name="brush" color="light"></ion-icon>
+      <ion-icon slot="end" name="brush" color="light"></ion-icon>
+    </ion-range>
+
+  </div> -->
+
+</div>

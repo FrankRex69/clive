@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Modifica Utente</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="form" class="ion-padding">
+    <ion-item>
+      <ion-label position="floating">Nome e Cognome</ion-label>
+      <ion-input type="text" formControlName="collaudatoreufficio"></ion-input>
+    </ion-item>
+
+    <dropdown-item
+      formControlName="commessa"
+      [key]="'commessa'"
+      [title]="'Commessa'"
+      [inputObs$]="this.commissionService.commissions$"
+      [selectedItem]="user"
+      (event)="this.selectedCommission = $event"
+      #dropdown
+    >
+    </dropdown-item>
+
+    <ion-item>
+      <ion-label position="floating">Username (email)</ion-label>
+      <ion-input type="text" formControlName="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="text" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Autorizzazione</ion-label>
+      <ion-select
+        #autorizzazione
+        interface="popover"
+        value="{{ user?.autorizzazione }}"
+      >
+        <ion-select-option
+          *ngFor="let auth of authorizations"
+          [value]="auth.idAut"
+          >{{ auth.denAut }}</ion-select-option
+        ></ion-select
+      >
+    </ion-item>
+  </form>
+</ion-content>
+<div class="ion-margin-vertical ion-padding">
+  <ion-button
+    color="primary"
+    expand="block"
+    shape="round"
+    (click)="updateUser()"
+    >Aggiorna Utente
+  </ion-button>
+</div>

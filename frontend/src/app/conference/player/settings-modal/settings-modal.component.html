@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Impostazioni Audio/Video</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-list>
+    <!-- List Header Full Lines -->
+    <ion-list-header lines="full">
+      <ion-label>Video Input</ion-label>
+      <ion-button class="square-btn" (click)="resetVideoInput()">
+        <ion-icon slot="icon-only" name="refresh-sharp"></ion-icon>
+      </ion-button>
+    </ion-list-header>
+    <ion-spinner *ngIf="isLoading"></ion-spinner>
+    <ion-radio-group *ngIf="!isLoading" [(ngModel)]="selectedVideoInputId">
+      <div *ngFor="let videoInput of playerSettings.videoInputs">
+        <ion-item lines="none">
+          <ion-label><p>{{videoInput.label}}</p></ion-label>
+          <ion-radio [value]="videoInput.id"></ion-radio>
+        </ion-item>
+      </div>
+    </ion-radio-group>
+  </ion-list>
+  <ion-list>
+    <ion-list-header lines="full">
+      <ion-label>Audio Input</ion-label>
+      <ion-button class="square-btn" (click)="resetAudioInput()">
+        <ion-icon slot="icon-only" name="refresh-sharp"></ion-icon>
+      </ion-button>
+    </ion-list-header>
+    <ion-spinner *ngIf="isLoading"></ion-spinner>
+    <ion-radio-group *ngIf="!isLoading" [(ngModel)]="selectedAudioInputId">
+      <div *ngFor="let audioInput of playerSettings.audioInputs">
+        <ion-item lines="none">
+          <ion-label><p>{{audioInput.label}}</p></ion-label>
+          <ion-radio [value]="audioInput.id"></ion-radio>
+        </ion-item>
+      </div>
+    </ion-radio-group>
+  </ion-list>
+  <ion-list>
+    <ion-list-header lines="full">
+      <ion-label>Audio Output</ion-label>
+      <ion-button class="square-btn" (click)="resetAudioOutput()">
+        <ion-icon slot="icon-only" name="refresh-sharp"></ion-icon>
+      </ion-button>
+    </ion-list-header>
+    <ion-spinner *ngIf="isLoading"></ion-spinner>
+    <ion-radio-group *ngIf="!isLoading" [(ngModel)]="selectedAudioOutputId">
+      <div *ngFor="let audioOutput of playerSettings.audioOutputs">
+        <ion-item lines="none">
+          <ion-label><p>{{audioOutput.label}}</p></ion-label>
+          <ion-radio [value]="audioOutput.id"></ion-radio>
+        </ion-item>
+      </div>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>
+<div class="ion-margin-vertical ion-padding">
+  <ion-button
+    color="primary"
+    expand="block"
+    shape="round"
+    (click)="updateSettings()"
+    >Aggiorna Impostazioni
+  </ion-button>
+</div>

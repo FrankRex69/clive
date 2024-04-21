@@ -1,0 +1,46 @@
+<ion-row class="ion-align-items-center row-data">
+  <ion-col *ngFor="let col of columns" [size]="col.size">
+    <div *ngIf="col.type !== 'buttons'" class="data-item">
+      <ion-icon
+        *ngIf="col.key === 'autorizzazione'"
+        class="data-icon"
+        name="person-circle-outline"
+        [color]="
+          user[col.key] === 'admin'
+            ? 'danger'
+            : user[col.key] === 'supervisor'
+            ? 'primary'
+            : 'secondary'
+        "
+      >
+      </ion-icon>
+      {{
+        col.type === 'date' ? (user[col.key] | date: 'dd/MM/yy') : user[col.key]
+      }}
+    </div>
+    <div *ngIf="col.type === 'buttons'" class="btns">
+      <span data-tooltip="Modifica" data-tooltip-position="top">
+        <ion-button
+          size="small"
+          class="ion-no-margin"
+          expand="block"
+          fill="clear"
+          (click)="editUser()"
+        >
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </span>
+      <span data-tooltip="Elimina" data-tooltip-position="top">
+        <ion-button
+          size="small"
+          class="ion-no-margin"
+          expand="block"
+          fill="clear"
+          (click)="deleteUser()"
+        >
+          <ion-icon name="trash-outline" button="true" tappable></ion-icon>
+        </ion-button>
+      </span>
+    </div>
+  </ion-col>
+</ion-row>

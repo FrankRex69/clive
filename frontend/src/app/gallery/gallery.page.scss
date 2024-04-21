@@ -1,0 +1,245 @@
+.card-title {
+  box-shadow: none;
+}
+.backTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .title {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--ion-color-light);
+    transform: translateY(-3px);
+    word-wrap: break-word;
+    word-break: break-all;
+  }
+}
+.segment-btn {
+  --background-checked: var(--ion-color-primary);
+  --color-checked: var(--ion-color-primary-contrast);
+  --background-hover: var(--ion-color-tertiary-shade);
+  --border-color: var(--ion-color-tertiary-shade);
+  --border-style: solid;
+  --border-width: 1px;
+  --indicator-color: trasparent;
+}
+.btn-trasparent {
+  color: var(--ion-color-medium);
+  --background: none;
+  text-transform: lowercase;
+}
+.foto-thumbnail-mobile {
+  --size: 120px;
+  margin: 0 auto;
+  position: relative;
+  .data-id {
+    position: absolute;
+    bottom: 0;
+    font-size: 6px;
+    color: #fff;
+    background-color: #0000006b;
+    padding: 0 2px 0 2px;
+  }
+}
+.foto-thumbnail-desktop {
+  --size: 260px;
+  margin: 40px 20px;
+  position: relative;
+  .data-id {
+    position: absolute;
+    bottom: 0;
+    font-size: 10px;
+    color: #fff;
+    background-color: #0000006b;
+    padding: 0 4px 0 4px;
+  }
+}
+.note-yes {
+  background-color: var(--ion-color-light-shade);
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  right: 0;
+  height: 20px;
+  width: 20px;
+  transform: translate(-10%, -10%);
+  .note-ico {
+    width: 50%;
+    height: 50%;
+  }
+}
+/* .note-yes-desk{
+  background-color: var(--ion-color-light-shade);
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  right: 0;
+  height: 20px;
+  width: 20px;
+  transform: translate(-25px, -50px);
+  .note-ico{
+    width: 50%;
+    height: 50%;
+  }
+} */
+.icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.image-container {
+  background-size: cover;
+  min-height: 160px;
+  min-width: 160px;
+}
+.backTitle-desktop {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  .title-btn {
+    margin-top: 8px;
+  }
+}
+.head-btn-desktop {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.divider {
+  background: var(--ion-color-medium);
+  height: 1px;
+}
+
+.back-to-top-btn {
+  background: var(--ion-color-primary);
+  position: fixed;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 95%;
+  transform: translateX(-50%);
+  bottom: 45px;
+  z-index: 999;
+  cursor: pointer;
+}
+
+/* loading spinner */
+.load-container {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+#building {
+  display: flex;
+  width: 35em;
+  height: 100vh;
+  margin: auto;
+}
+#blocks {
+  margin: auto;
+}
+#caption {
+  padding-left: 0.5em;
+  margin: auto;
+  font-size: 2.5em;
+}
+.b {
+  background: var(--ion-color-secondary);
+  width: 4.5em;
+  height: 4.5em;
+  border-radius: 0.5em;
+  margin: 1em;
+  position: relative;
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+#b1 {
+  animation-name: b1;
+}
+#b2 {
+  animation-name: b2;
+  margin-left: 7.25em;
+}
+#b3 {
+  animation-name: b3;
+  margin-top: -6em;
+}
+#b4 {
+  animation-name: b4;
+  margin-left: 7.25em;
+}
+@keyframes b1 {
+  0% {
+    left: 0em;
+    transform: rotate(0deg);
+  }
+  50% {
+    left: 6.25em;
+    bottom: 0em;
+    transform: rotate(90deg);
+  }
+  100% {
+    left: 6.25em;
+    bottom: -6.125em;
+    transform: rotate(90deg);
+  }
+}
+@keyframes b2 {
+  50% {
+    bottom: 0em;
+  }
+  100% {
+    bottom: -6.125em;
+  }
+}
+@keyframes b3 {
+  50% {
+    top: 0em;
+  }
+  100% {
+    top: -6.125em;
+  }
+}
+@keyframes b4 {
+  0% {
+    left: 0em;
+    transform: rotate(0deg);
+  }
+  50% {
+    left: -6.25em;
+    top: 0em;
+    transform: rotate(90deg);
+  }
+  100% {
+    left: -6.25em;
+    top: -6.125em;
+    transform: rotate(90deg);
+  }
+}
+@media (max-width: 400px) {
+  #building {
+    width: 100%;
+  }
+  #caption {
+    display: none;
+  }
+}

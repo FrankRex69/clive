@@ -1,0 +1,41 @@
+
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>test-webrtc-chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  
+  <!-- <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>
+      <p class="video-description">local:</p>
+      <video #local_video [autoplay]="true" [muted]="true"></video>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <p class="video-description">remote:</p>
+      <video #received_video [autoplay]="true"></video>
+    </mat-grid-tile>
+  </mat-grid-list> -->
+
+  <ion-grid>
+    <ion-row>
+    <ion-col size="6" size-md>
+      <p class="video-description">local:</p>
+      <video #local_video [autoplay]="true" [muted]="true"></video>
+    </ion-col>
+    <ion-col size="6" size-md>
+      <p class="video-description">remote:</p>
+      <video #received_video [autoplay]="true"></video>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+
+
+  <ion-button color="primary" (click)="startLocalVideo()" [disabled]="localVideoActive">Start Local</ion-button>
+  <ion-button color="primary" (click)="pauseLocalVideo()" [disabled]="!localVideoActive">Stop Local</ion-button>
+  <ion-button color="primary" (click)="call()" [disabled]="inCall || !localVideoActive">Call</ion-button>
+  <ion-button color="primary" (click)="hangUp()" [disabled]="!inCall">HangUp</ion-button>
+</ion-content>

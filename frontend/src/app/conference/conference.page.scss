@@ -1,0 +1,130 @@
+ion-grid {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mobile --> lg-down */
+@media only screen and (max-width: 992px) {
+  ion-grid {
+    padding: 0px;
+  }
+  ion-col {
+    padding: 0px;
+  }
+}
+/* Desktop --> lg-up */
+@media only screen and (min-width: 992px) {
+  ion-grid {
+    padding: 16px;
+  }
+  ion-col {
+    padding: 8px 16px 8px 16px;
+  }
+}
+
+ion-title {
+  font-size: 0px;
+  padding-inline: 8px;
+  .title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1px;
+  }
+  .subTitle {
+    font-size: 0.9rem;
+    font-weight: 200;
+  }
+}
+
+app-users-list {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+
+.chat-users {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 1.1em;
+  background: var(--ion-color-tertiary-tint);
+  border-bottom: 2px solid var(--ion-color-primary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  ion-text {
+    flex-grow: 1;
+    color: var(--ion-color-primary);
+  }
+}
+
+.tab-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  --background: none;
+  --background-hover: var(--ion-color-medium);
+  --background-focused: var(--ion-color-medium);
+  --color: var(--ion-color-medium);
+  --border-color: var(--ion-color-medium);
+  --border-style: solid;
+  --border-width: 0px 0px 2px 0px;
+  --border-radius: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0%;
+  font-weight: 500;
+  font-size: 0.9rem;
+  ion-text {
+    flex-grow: 1;
+    text-align: left;
+  }
+}
+
+.tab-active {
+  --background: var(--ion-color-tertiary-tint);
+  --background-hover: var(--ion-color-primary);
+  --background-focused: var(--ion-color-primary);
+  --color: var(--ion-color-primary);
+  --border-color: var(--ion-color-primary);
+}
+
+.button-active {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+}
+
+.notification {
+  z-index: 10;
+  width: 18px;
+  height: 18px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background-color: rgba(255, 0, 0, 0.333);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(1);
+  //animation:alternate .5s;
+  animation-name: circle-scale;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate-reverse;
+  animation-iteration-count: infinite;
+}
+.noti2 {
+  animation-delay: -250ms;
+}
+.noti3 {
+  animation-delay: -400ms;
+}
+
+@keyframes circle-scale {
+  to {
+    transform: scale(1.6);
+  }
+}

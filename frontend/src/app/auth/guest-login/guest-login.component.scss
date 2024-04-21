@@ -1,0 +1,83 @@
+.user-label {
+  padding-bottom: 16px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: white;
+}
+
+.guest-form-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+  background-color: var(--ion-color-secondary);
+  padding: 32px;
+  ion-item {
+    --background: var(--ion-color-secondary);
+    --border-color: var(--ion-color-tertiary);
+    --highlight-height: 0;
+    align-items: center;
+  }
+  ion-item.invalid {
+    --border-color: var(--ion-color-warning);
+    --border-width: 2px;
+  }
+  ion-button {
+    --background: white;
+    --border-radius: 0;
+    --color: var(--ion-color-secondary);
+    --padding-bottom: 0px;
+    --padding-end: 0px;
+    --padding-top: 0px;
+    --padding-start: 0px;
+    height: 48px;
+    width: 48px;
+    ion-icon.arrow {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.form-fields {
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 100%;
+  align-self: auto;
+  order: 0;
+}
+
+.form-button {
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  align-self: flex-end;
+  order: 0;
+  padding-left: 32px;
+}
+
+ion-label.smallLabel {
+  color: white !important;
+  opacity: 60%;
+  font-size: 0.8rem;
+}
+
+ion-input {
+  color: white !important;
+  font-size: 1rem;
+}
+
+ion-icon.show-password {
+  font-size: 1.2rem;
+  color: var(--ion-color-tertiary);
+  opacity: 60%;
+}
+
+ion-text {
+  color: var(--ion-color-warning);
+  font-size: 0.7rem;
+  padding-left: 16px;
+}

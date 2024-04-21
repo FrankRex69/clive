@@ -1,0 +1,41 @@
+<div [formGroup]="form">
+  <ion-item>
+    <ion-label position="floating">{{ title }}</ion-label>
+    <ion-input
+      formControlName="input"
+      type="search"
+      (click)="isListOpen = true"
+      (ionInput)="searchStream$.next($event.target.value)"
+    >
+    </ion-input>
+    <ion-button
+      fill="clear"
+      slot="end"
+      class="ion-align-self-center"
+      (click)="isListOpen = !isListOpen"
+    >
+      <ion-icon
+        [name]="isListOpen ? 'close' : 'chevron-down-outline'"
+        slot="icon-only"
+      ></ion-icon>
+    </ion-button>
+  </ion-item>
+  <ion-row class="dropdown">
+    <ion-col
+      class="dropdown-content"
+      [ngStyle]="{ display: isListOpen ? 'block' : 'none' }"
+      *ngIf="items$ | async as items"
+    >
+      <ion-list class="ion-no-padding" *ngFor="let item of items">
+        <ion-item button="true" lines="none" (click)="onChooseItem(item)">
+          <ion-icon
+            name="chevron-forward-outline"
+            slot="start"
+            class="ion-align-self-center"
+          ></ion-icon>
+          <ion-label>{{ item[this.key] }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</div>

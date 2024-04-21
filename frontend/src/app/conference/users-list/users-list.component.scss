@@ -1,0 +1,78 @@
+.user-list-container {
+  background: transparent;
+  overflow-y: scroll;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+.user-icons-container {
+  background: transparent;
+  display: flex;
+  flex-grow: 1;
+  gap: 6px;
+}
+.icons-horizontal {
+  flex-direction: row;
+  overflow-x: scroll;
+  width: calc(100vw - 80px);
+}
+.icons-vertical {
+  flex-direction: column;
+  overflow-y: scroll;
+  height: calc(50vh - 108px);
+}
+
+ion-item {
+  --background: transparent;
+  align-content: center;
+  --padding-start: 0px;
+  --inner-padding-end: 0;
+}
+
+.user {
+  background-color: #bee6ee;
+}
+.glasses {
+  background-color: var(--ion-color-primary);
+  ion-icon {
+    color: #fff;
+    height: 100%;
+    width: 100%;
+  }
+}
+.avatar {
+  height: 42px;
+  width: 42px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  padding: 5px;
+  border: 2px solid var(--ion-color-primary);
+}
+
+ion-text {
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+ion-label {
+  h2 {
+    font-weight: 600;
+  }
+}
+.icons {
+  display: flex;
+  flex-direction: row;
+  margin-left: 16px;
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    width: 42px;
+    ion-icon {
+      font-size: 1.5rem;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+<div #container class="container">
+  <div class="row">
+    <div class="box-sh primaryCanvas">
+      <canvas
+        #imageCanvas
+        (mousedown)="startDrawing($event)"
+        (touchstart)="startDrawing($event)"
+        (mousemove)="moved($event)"
+        (touchmove)="moved($event)"
+        (mouseup)="endDrawing($event)"
+        (touchend)="endDrawing($event)"
+      >
+      </canvas>
+    </div>
+  </div>
+  <!-- <div class="colorMenu">
+    <ion-radio-group [(ngModel)]="selectedColor">
+      <ion-row>
+        <ion-col
+          *ngFor="let color of colors"
+          tappable
+          (click)="selectColor(color)"
+          class="color-block"
+        >
+          <ion-radio
+            [style.background]="color"
+            [value]="color"
+            color="dark"
+          ></ion-radio>
+        </ion-col>
+      </ion-row>
+    </ion-radio-group>
+  </div> -->
+  <!--   <div class="lineWidthRange">
+    <ion-range min="2" max="10" color="dark" [(ngModel)]="lineWidth">
+      <ion-icon size="small" slot="start" name="brush" color="dark"></ion-icon>
+      <ion-icon slot="end" name="brush" color="dark"></ion-icon>
+    </ion-range>
+
+  </div> -->
+</div>

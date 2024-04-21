@@ -1,0 +1,154 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="2" offset-md="2">
+        <ion-button
+        [href]="environment.urlNMS"
+          target="_blank"
+          expand="block"
+        >
+          <ion-icon slot="start" name="tv-outline"></ion-icon>
+          NodeMedia
+        </ion-button>
+      </ion-col>
+      <ion-col size-md="2">
+        <ion-button
+          href="http://www.eaglelive.tv:5080/#/pages/login"
+          target="_blank"
+          expand="block"
+        >
+          <ion-icon slot="start" name="headset-outline"></ion-icon>
+          AntMedia
+        </ion-button>
+      </ion-col>
+      <ion-col size-md="2">
+        <ion-button
+          href="https://www.collaudolive.com:9080/geoserver/web/"
+          target="_blank"
+          expand="block"
+        >
+          <ion-icon slot="start" name="map-outline"></ion-icon>
+          Geoserver
+        </ion-button>
+      </ion-col>
+      <ion-col size-md="2">
+        <ion-button (click)="onRiavviaStreaming()" expand="block">
+          <ion-icon
+            slot="start"
+            name="videocam-off-outline"
+            color="danger"
+          ></ion-icon>
+          Riavvia
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-md="4" offset-md="2">
+        <ion-card [disabled]="this.syncService.sync" class="gisfo-sync-card">
+          <ion-card-header>
+            <ion-card-title color="primary"
+              >Sincronizza Progetto</ion-card-title
+            >
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="form">
+              <dropdown-item
+                formControlName="collaudatoreufficio"
+                [key]="'collaudatoreufficio'"
+                [title]="'Collaudatore'"
+                [inputObs$]="this.userService.users$"
+                (event)="selectedUser = $event"
+              >
+              </dropdown-item>
+              <ion-item>
+                <ion-label position="floating"
+                  >Inserisci il PK Projects</ion-label
+                >
+                <ion-input type="text" formControlName="pk_proj"></ion-input>
+              </ion-item>
+            </form>
+            <div class="ion-text-right ion-margin-vertical">
+              <ion-button
+                [disabled]="this.syncService.sync"
+                color="primary"
+                fill="outline"
+                shape="round"
+                (click)="syncProject()"
+              >
+                <ion-icon slot="start" name="sync-circle-outline"></ion-icon
+                >Sync
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+        <div class="ion-margin" *ngIf="this.syncService.sync">
+          Attendere il completamento della sincronizzazione
+        </div>
+      </ion-col>
+      <ion-col size-md="4">
+        <ion-card class="nperf-card">
+          <ion-card-header>
+            <ion-card-title color="primary">Crea link nPerf</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item>
+              <ion-label position="floating" class="ion-text-wrap">
+                Coordinate / Comune
+              </ion-label>
+              <ion-input type="text" #coordinate></ion-input>
+            </ion-item>
+            <div class="ion-text-right ion-margin-vertical btnNperf">
+              <!-- to do cambiare icone ai btn e restituire errore se array vuoto -->
+              <!-- <ion-button shape="round" fill="outline" color="primary"
+                (click)="createLink(coordinate.value.toString())">
+                <ion-icon slot="start" name="caret-forward-circle-outline"></ion-icon>Cerca Coordinate
+              </ion-button> -->
+              <div *ngIf="searching" class="ion-padding-horizontal">
+                <ion-spinner></ion-spinner>
+              </div>
+              <div *ngIf="!searching" class="ion-padding-horizontal">
+                {{ errorMessage }}
+              </div>
+              <ion-button
+                shape="round"
+                fill="outline"
+                color="primary"
+                (click)="ricercaComune(coordinate.value.toString())"
+              >
+                <ion-icon
+                  slot="start"
+                  name="caret-forward-circle-outline"
+                ></ion-icon
+                >Cerca Comune
+              </ion-button>
+              <ion-button
+                shape="round"
+                fill="outline"
+                color="primary"
+                (click)="ricercaCoordinate(coordinate.value.toString())"
+              >
+                <ion-icon
+                  slot="start"
+                  name="caret-forward-circle-outline"
+                ></ion-icon
+                >Cerca Coordinate
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <!-- <ion-col size-md="4">
+        <ion-card class="console ion-margin-vertical">
+          <ion-card-header>
+            <ion-card-title color="light">LOG</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p *ngFor="let log of logs" class="colorW">> {{log.date | date:'hh:mm:ss'}} - PK: {{log.pk_proj}} -
+              {{log.message}}</p>
+            <p class="line">><span class="cursor colorW">_</span></p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col> -->
+    </ion-row>
+  </ion-grid>
+</ion-content>

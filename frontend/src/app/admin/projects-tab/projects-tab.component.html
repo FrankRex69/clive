@@ -1,0 +1,48 @@
+<!-- Searchbar  -->
+<div class="searchbarAdd">
+  <ion-searchbar
+    class="search-bar"
+    (ionInput)="searchStream$.next($event.target.value)"
+  ></ion-searchbar>
+  <!-- Create Project Button -->
+  <ion-button color="secondary" (click)="createProject()">
+    <ion-icon name="add" slot="icon-only"></ion-icon>
+  </ion-button>
+</div>
+
+<!-- Desktop -->
+<ion-content class="ion-hide-md-down">
+  <!-- Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!-- Projects Table -->
+  <app-generic-table
+    [inputDatas$]="projects$"
+    [columns]="columns"
+    [desktopItem]="desktopItem"
+  >
+    <ng-template #desktopItem let-data="data">
+      <!-- Projects Table Item -->
+      <app-projects-table-item
+        [proj]="data"
+        [columns]="columns"
+      ></app-projects-table-item>
+    </ng-template>
+  </app-generic-table>
+</ion-content>
+
+<!-- Mobile -->
+<ion-content class="ion-hide-md-up">
+  <!-- Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!-- Projects List -->
+  <app-generic-list [inputDatas$]="projects$" [mobileItem]="mobileItem">
+    <ng-template #mobileItem let-data="data">
+      <!-- Projects List Item -->
+      <app-projects-list-item [proj]="data"></app-projects-list-item>
+    </ng-template>
+  </app-generic-list>
+</ion-content>
