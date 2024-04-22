@@ -353,7 +353,7 @@ export class MapComponent implements OnInit {
               title: 'Nodi fisici',
               minZoom: 12,
               source: new TileWMS({
-                url: 'https://www.collaudolive.com:9080/geoserver/CollaudoLiveGisfo/wms',
+                url: 'http://localhost:9080/geoserver/CollaudoLiveGisfo/wms',
                 params: {
                   LAYERS: mapData.nodifisici,
                   TILED: true,
@@ -365,7 +365,7 @@ export class MapComponent implements OnInit {
               title: 'Nodi ottici',
               minZoom: 12,
               source: new TileWMS({
-                url: 'https://www.collaudolive.com:9080/geoserver/CollaudoLiveGisfo/wms',
+                url: 'http://localhost:9080/geoserver/CollaudoLiveGisfo/wms',
                 params: { LAYERS: mapData.nodiottici, TILED: true },
                 serverType: 'geoserver',
               }),
@@ -374,7 +374,7 @@ export class MapComponent implements OnInit {
               title: 'Tratte',
               minZoom: 12,
               source: new TileWMS({
-                url: 'https://www.collaudolive.com:9080/geoserver/CollaudoLiveGisfo/wms',
+                url: 'http://localhost:9080/geoserver/CollaudoLiveGisfo/wms',
                 params: { LAYERS: mapData.tratte, TILED: true },
                 serverType: 'geoserver',
               }),

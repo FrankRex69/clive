@@ -1,6 +1,6 @@
 exports.alfaNumeCasuale = function(iLen: number){
 
-  // SCRIPT PER sincroDb (https://www.collaudolive.com:port/sincrodb/idutnete/pk_proj/codcasuale)
+  // SCRIPT PER sincroDb (http://localhost:port/sincrodb/idutnete/pk_proj/codcasuale)
   // Quando si esegue la sincronizzazione dei db gisfo si chiede un codice casuale,
   // per inserirlo nella "rappre_prog_gisfo" al termine dell'operazione.
 
@@ -38,7 +38,7 @@ exports.alfaNumeCasuale = function(iLen: number){
 
 exports.alfaNumeCasualeUtenti = function(iLen: number){
 
-  // SCRIPT PER sincroDb (https://www.collaudolive.com:port/sincrodb/idutnete/pk_proj/codcasuale)
+  // SCRIPT PER sincroDb (http://localhost:port/sincrodb/idutnete/pk_proj/codcasuale)
   // Quando si esegue la sincronizzazione dei db gisfo si chiede un codice casuale,
   // per inserirlo nella "rappre_prog_gisfo" al termine dell'operazione.
 

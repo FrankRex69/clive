@@ -13,7 +13,7 @@ import { Room, RoomService } from '../room.service';
 })
 export class RoomFunctionsService {
   // baseUrl =
-  //   'https://www.collaudolive.com:9777/glasses/FrontEnd/src/index.php?q=';
+  //   'http://localhost:9777/glasses/FrontEnd/src/index.php?q=';
 
   constructor(
     private platform: Platform,
@@ -189,7 +189,7 @@ export class RoomFunctionsService {
       if (value) {
         const link = document.createElement('a');
         //link.setAttribute('target', '_blank');
-        //link.setAttribute('href', `https://www.collaudolive.com:9083/downloadzip/${nomeProgetto}`);
+        //link.setAttribute('href', `http://localhost:9083/downloadzip/${nomeProgetto}`);
         link.setAttribute(
           'href',
           `${environment.apiUrl}/downloadzip/${nomeProgetto}`

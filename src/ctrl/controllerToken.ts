@@ -1,4 +1,6 @@
-exports.getToken = (req: any, res: any, next: any) => { 
+exports.getToken = (req: any, res: any, next: any) => {
+    console.log('1111');
+    
 
     const jwt = require('.././middleware/jwt');    
     

@@ -8,10 +8,10 @@ const conn = mysql.createConnection({
     user     : crecry.dbusername,
     password : crecry.dbpassword,
     database : crecry.db,
-    ssl: {
-        rejectUnauthorized: false,
-        ca: fs.readFileSync('/etc/letsencrypt/live/www.collaudolive.com/cert.pem').toString()  
-    }
+    // ssl: {
+    //     rejectUnauthorized: false,
+    //     ca: fs.readFileSync('/etc/letsencrypt/live/www.collaudolive.com/cert.pem').toString()  
+    // }
 });
 
 module.exports = conn;
