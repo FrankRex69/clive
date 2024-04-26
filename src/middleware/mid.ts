@@ -1,23 +1,17 @@
-exports.checkAuth = (req: any, res: any, next: any)=>{
-
-    console.log('dsfsf');
-    
+exports.checkAuth = (req: any, res: any, next: any)=>{    
 
     const jwtRecall = require('./jwt');
 
     try {
         if(req.headers['authorization'] == null){
-            console.log('aaaa');
-            
+            console.log('Non autorizzato.');            
             res.sendStatus(401);
         }
         else
         {
-            console.log('bbb');
-            
+            console.log('Autorizzazione corretta.');            
             let token = req.headers['authorization'];
-            console.log(token);
-                  
+                              
             token = token.slice(7,token.length);
             jwtRecall.checkToken(token);     
             next();

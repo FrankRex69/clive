@@ -1,8 +1,4 @@
 exports.checkLogin = (req: any, res: any, next: any) => {
-
-  console.log(req.body.usr);
-  console.log(req.body.pwd);
-  
    
   let pkproject: number;
   if(!req.body.pkproject){
@@ -60,6 +56,7 @@ exports.checkLogin = (req: any, res: any, next: any) => {
         let token: any = jwt.setToken(usr,pwd);
         let payload = jwt.getPayload(token);          
         if(pkproject==0){
+          console.log('2) credenziali corrette');          
           res.json(
             {
               token: token
