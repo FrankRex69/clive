@@ -41,16 +41,12 @@ exports.checkLogin = (req: any, res: any, next: any) => {
   //   datiDb = [usr, pwd, pkproject];      
   // }
   
-  if(pkproject==0){
-    console.log(usr);
-    console.log(pwd);
-    
+  if(pkproject==0){    
     select = "SELECT id FROM utenti WHERE (BINARY username = ?) AND (BINARY password = ?)";
     datiDb = [usr, pwd];
   }
   else
-  {
-    console.log('2222bbb');
+  {    
     select = "SELECT utenti.id, utenti.username, utenti.password, multistreaming.collaudatoreufficio, multistreaming.cod FROM utenti INNER JOIN multistreaming ON multistreaming.collaudatoreufficio = utenti.id WHERE utenti.username = ? AND utenti.password = ? AND multistreaming.cod = ?";
     datiDb = [usr, pwd, pkproject];
   } 
