@@ -16,44 +16,47 @@ exports.checkLogin = (req: any, res: any, next: any) => {
       
   const db = require('../conf/db'); 
 
-  // if(pkproject==0){
-  //   select = "SELECT utenti.id AS idutente, utenti.idcommessa AS idcommessa, commesse.denominazione AS commessanome, utenti.autorizzazioni AS autorizzazione, utenti.idutcas AS idutcas, utenti.collaudatoreufficio AS nomecognome, ";
-  //   select = select + "autorizzazioni.btnStream AS btnStream, autorizzazioni.btnCpt AS btnCpt, autorizzazioni.btnGall AS btnGall, autorizzazioni.btnGallDel AS btnGallDel, autorizzazioni.btnGallUpdate AS btnGallUpdate, autorizzazioni.btnGallDownload AS btnGallDownload, autorizzazioni.btnInsMkr AS btnInsMkr, "
-  //   select = select + "autorizzazioni.btnDelMkr AS btnDelMkr, autorizzazioni.btnGpsOn AS btnGpsOn, autorizzazioni.btnBkoff AS btnBkoff, autorizzazioni.btnRooms AS btnRooms, autorizzazioni.btnBoard AS btnBoard "
-  //   select = select + "FROM utenti "
-  //   select = select + "INNER JOIN autorizzazioni ON autorizzazioni.id = utenti.autorizzazioni "
-  //   select = select + "INNER JOIN commesse ON commesse.id = utenti.idcommessa "
-  //   select = select + "WHERE (BINARY username = ?) AND (BINARY password = ?) "     
-  //   datiDb = [usr, pwd];  
-  // }
-  // else
-  // {
-  //   select = "SELECT utenti.id AS idutente, utenti.idcommessa AS idcommessa, utenti.autorizzazioni AS autorizzazione, utenti.username, utenti.password, multistreaming.collaudatoreufficio, multistreaming.cod, utenti.idutcas AS idutcas, utenti.collaudatoreufficio AS nomecognome, commesse.denominazione AS commessanome, commesse.id, ";
-  //   select = select + "autorizzazioni.btnStream AS btnStream, autorizzazioni.btnCpt AS btnCpt, autorizzazioni.btnGall AS btnGall, autorizzazioni.btnGallDel AS btnGallDel, autorizzazioni.btnGallUpdate AS btnGallUpdate, autorizzazioni.btnGallDownload AS btnGallDownload, autorizzazioni.btnInsMkr AS btnInsMkr, "
-  //   select = select + "autorizzazioni.btnDelMkr AS btnDelMkr, autorizzazioni.btnGpsOn AS btnGpsOn, autorizzazioni.btnBkoff AS btnBkoff, autorizzazioni.btnRooms AS btnRooms, autorizzazioni.btnBoard AS btnBoard "
-  //   select = select + "FROM utenti " 
-  //   select = select + "INNER JOIN autorizzazioni ON autorizzazioni.id = utenti.autorizzazioni "
-  //   select = select + "INNER JOIN multistreaming ON multistreaming.collaudatoreufficio = utenti.id INNER JOIN commesse ON commesse.id = utenti.idcommessa WHERE utenti.username = ? AND utenti.password = ? AND multistreaming.cod = ?";
-  //   datiDb = [usr, pwd, pkproject];      
-  // }
-  
-  if(pkproject==0){    
-    select = "SELECT id FROM utenti WHERE (BINARY username = ?) AND (BINARY password = ?)";
-    datiDb = [usr, pwd];
+  if(pkproject==0){
+    select = "SELECT utenti.id AS idutente, utenti.idcommessa AS idcommessa, commesse.denominazione AS commessanome, utenti.autorizzazioni AS autorizzazione, utenti.idutcas AS idutcas, utenti.collaudatoreufficio AS nomecognome, ";
+    select = select + "autorizzazioni.btnStream AS btnStream, autorizzazioni.btnCpt AS btnCpt, autorizzazioni.btnGall AS btnGall, autorizzazioni.btnGallDel AS btnGallDel, autorizzazioni.btnGallUpdate AS btnGallUpdate, autorizzazioni.btnGallDownload AS btnGallDownload, autorizzazioni.btnInsMkr AS btnInsMkr, "
+    select = select + "autorizzazioni.btnDelMkr AS btnDelMkr, autorizzazioni.btnGpsOn AS btnGpsOn, autorizzazioni.btnBkoff AS btnBkoff, autorizzazioni.btnRooms AS btnRooms, autorizzazioni.btnBoard AS btnBoard "
+    select = select + "FROM utenti "
+    select = select + "INNER JOIN autorizzazioni ON autorizzazioni.id = utenti.autorizzazioni "
+    select = select + "INNER JOIN commesse ON commesse.id = utenti.idcommessa "
+    select = select + "WHERE (BINARY username = ?) AND (BINARY password = ?) "     
+    datiDb = [usr, pwd];  
   }
   else
-  {    
-    select = "SELECT utenti.id, utenti.username, utenti.password, multistreaming.collaudatoreufficio, multistreaming.cod FROM utenti INNER JOIN multistreaming ON multistreaming.collaudatoreufficio = utenti.id WHERE utenti.username = ? AND utenti.password = ? AND multistreaming.cod = ?";
-    datiDb = [usr, pwd, pkproject];
-  } 
+  {
+    select = "SELECT utenti.id AS idutente, utenti.idcommessa AS idcommessa, utenti.autorizzazioni AS autorizzazione, utenti.username, utenti.password, multistreaming.collaudatoreufficio, multistreaming.cod, utenti.idutcas AS idutcas, utenti.collaudatoreufficio AS nomecognome, commesse.denominazione AS commessanome, commesse.id, ";
+    select = select + "autorizzazioni.btnStream AS btnStream, autorizzazioni.btnCpt AS btnCpt, autorizzazioni.btnGall AS btnGall, autorizzazioni.btnGallDel AS btnGallDel, autorizzazioni.btnGallUpdate AS btnGallUpdate, autorizzazioni.btnGallDownload AS btnGallDownload, autorizzazioni.btnInsMkr AS btnInsMkr, "
+    select = select + "autorizzazioni.btnDelMkr AS btnDelMkr, autorizzazioni.btnGpsOn AS btnGpsOn, autorizzazioni.btnBkoff AS btnBkoff, autorizzazioni.btnRooms AS btnRooms, autorizzazioni.btnBoard AS btnBoard "
+    select = select + "FROM utenti " 
+    select = select + "INNER JOIN autorizzazioni ON autorizzazioni.id = utenti.autorizzazioni "
+    select = select + "INNER JOIN multistreaming ON multistreaming.collaudatoreufficio = utenti.id INNER JOIN commesse ON commesse.id = utenti.idcommessa WHERE utenti.username = ? AND utenti.password = ? AND multistreaming.cod = ?";
+    datiDb = [usr, pwd, pkproject];      
+  }
+
+  console.log(select);
+  
+  
+  // if(pkproject==0){    
+  //   select = "SELECT id FROM utenti WHERE (BINARY username = ?) AND (BINARY password = ?)";
+  //   datiDb = [usr, pwd];
+  // }
+  // else
+  // {    
+  //   select = "SELECT utenti.id, utenti.username, utenti.password, multistreaming.collaudatoreufficio, multistreaming.cod FROM utenti INNER JOIN multistreaming ON multistreaming.collaudatoreufficio = utenti.id WHERE utenti.username = ? AND utenti.password = ? AND multistreaming.cod = ?";
+  //   datiDb = [usr, pwd, pkproject];
+  // } 
   
   db.query(select, datiDb, function (err: any, result: any, fields: any) {        
       
     //if(result.length >= 1){  
     if(result){             
         const jwt = require('.././middleware/jwt'); 
-        //let token: any = jwt.setToken(usr,pwd,result[0]['idutente'],result[0]['idcommessa'],result[0]['autorizzazione'],result[0]['idutcas'],result[0]['nomecognome'],result[0]['commessanome'], result[0]['btnStream'], result[0]['btnCpt'], result[0]['btnGall'], result[0]['btnGallDel'], result[0]['btnGallUpdate'], result[0]['btnGallDownload'], result[0]['btnInsMkr'], result[0]['btnDelMkr'], result[0]['btnGpsOn'], result[0]['btnBkoff'], result[0]['btnRooms'], result[0]['btnBoard']);
-        let token: any = jwt.setToken(usr,pwd);
+        let token: any = jwt.setToken(usr,pwd,result[0]['idutente'],result[0]['idcommessa'],result[0]['autorizzazione'],result[0]['idutcas'],result[0]['nomecognome'],result[0]['commessanome'], result[0]['btnStream'], result[0]['btnCpt'], result[0]['btnGall'], result[0]['btnGallDel'], result[0]['btnGallUpdate'], result[0]['btnGallDownload'], result[0]['btnInsMkr'], result[0]['btnDelMkr'], result[0]['btnGpsOn'], result[0]['btnBkoff'], result[0]['btnRooms'], result[0]['btnBoard']);
+        //let token: any = jwt.setToken(usr,pwd);
         let payload = jwt.getPayload(token);          
         if(pkproject==0){
           console.log('2) credenziali corrette');          

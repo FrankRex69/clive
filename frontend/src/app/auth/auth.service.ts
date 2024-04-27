@@ -174,12 +174,12 @@ export class AuthService implements OnDestroy {
         if (!loginToken) {
           throw new Error('Errore server');
         }
-        // console.log('🐱‍👤 : AuthService : loginToken', loginToken);
+        console.log('🐱‍👤 : AuthService : loginToken', loginToken);
         return this.http.post(
           `${environment.apiUrl}/lgn/`,
           {
             usr: username,
-            pwd: password,
+            pwd: password
           },
           {
             headers: new HttpHeaders().set(

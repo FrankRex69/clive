@@ -67,7 +67,7 @@ export class UserLoginComponent implements OnInit {
               }
             },
             (err) => {
-              // console.log('🐱‍👤 : LoginComponent : err', err);
+              console.log('🐱‍👤 : LoginComponent : err', err);
               loadingEl.dismiss();
               this.showAlert(err);
             }
