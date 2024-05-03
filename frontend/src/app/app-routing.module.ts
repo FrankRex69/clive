@@ -22,7 +22,7 @@ const routes: Routes = [
       import('./conference/conference.module').then(
         (m) => m.ConferencePageModule
       ),
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     canLoad: [AuthGuard],
   },
   {

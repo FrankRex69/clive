@@ -8,10 +8,10 @@ export const environment = {
   production: false,
   app: `http://localhost:8100`,
   apiUrl: `http://localhost:9187`,
-  urlRTMP: `rtmp://www.collaudolive.com:1941`,
-  urlWSS: `wss://www.collaudolive.com:8471`,
+  urlRTMP: `rtmp://localhost:1941`,
+  urlWSS: `ws://localhost:8471`,
   urlNMS: `http://localhost:8471/admin/streams`,
-  wsEndpoint: 'wss://www.collaudolive.com:5556/ws/',
+  wsEndpoint: 'ws://localhost:5556/ws/',
   RTCPeerConfiguration: {
     iceServers: [
       {        
