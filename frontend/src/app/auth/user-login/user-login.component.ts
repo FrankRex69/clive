@@ -55,9 +55,7 @@ export class UserLoginComponent implements OnInit {
         this.authService
           .login(this.loginForm.value.username, this.loginForm.value.password)
           .subscribe(
-            (res) => {
-              console.log('------->' + res);
-              
+            (res) => {              
               this.loginForm.reset();
               loadingEl.dismiss();
               if (this.roomId) {

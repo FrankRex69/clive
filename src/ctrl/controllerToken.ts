@@ -10,7 +10,8 @@ exports.getToken = (req: any, res: any, next: any) => {
     
     res.json(
         {
-            token: token
+            token: token,
+            payload: payload
         }
     );
 

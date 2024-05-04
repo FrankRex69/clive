@@ -16,7 +16,6 @@ interface TokenPayload {
   idcommessa: string;
   commessa: string;
   autorizzazione: string;
-
   btnStream: number;
   btnCpt: number;
   btnGall: number;
@@ -29,7 +28,6 @@ interface TokenPayload {
   btnBkoff: number;
   btnRooms: number;
   btnBoard: number;
-
   exp: number;
   iat: number;
 }
@@ -176,21 +174,13 @@ export class AuthService implements OnDestroy {
       {
         headers: new HttpHeaders().set(
           'Authorization',
-          `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQyMzIxMjV9.MYz5hJ6MGZ_J-75Qg0SvhykXzQtjwEeECS80shPEus4`
+          `Bearer eyJhbGciOiJIUzI1NiJ9.W29iamVjdCBPYmplY3Rd.3bEqMdpH68tp1ZbRneuSatEi0QTAsf09mH4g5A1qo7c`
         ),
       }
     );
   }
 
-  login(username: string, password: string) {
-    let bodyData = {
-     'usr': 'admin',
-     'pwd': 'Bambini',
-     'pkproject': 0
-    }
-
-    console.log(bodyData);
-    
+  login(username: string, password: string) {     
     return this.http.post(`${environment.apiUrl}/token/`, {}).pipe(
       catchError((err) => {
         return throwError('Errore server');
@@ -203,14 +193,13 @@ export class AuthService implements OnDestroy {
         return this.http.post(
           `${environment.apiUrl}/lgn/`,
           {
-            'usr': 'admin',
-            'pwd': 'Bambini',
-            'pkproject': 0
+            'usr': username,
+            'pwd': password
           },
           {
             headers: new HttpHeaders().set(
               'Authorization',
-              `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQyMzIxMjV9.MYz5hJ6MGZ_J-75Qg0SvhykXzQtjwEeECS80shPEus4`
+              `Bearer ${loginToken['token']}`
             ),
           }
         );
@@ -222,7 +211,8 @@ export class AuthService implements OnDestroy {
         if (!tokenData || !tokenData['token']) {
           throw new Error('Credenziali errate');
         } else {
-          this.setUserData('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQyMzIxMjV9.MYz5hJ6MGZ_J-75Qg0SvhykXzQtjwEeECS80shPEus4', false);
+          console.log(tokenData['token']);          
+          this.setUserData(tokenData['token'], false);
         }
       })
     );
@@ -284,10 +274,14 @@ export class AuthService implements OnDestroy {
     nome?: string,
     cognome?: string
   ) {
-    const payload: TokenPayload = this.jwtHelper.decodeToken(token);
+    console.log('11111');
+    const payload: TokenPayload = this.jwtHelper.decodeToken(token);    
+    console.log("payload 2222");
+    
+    
     // console.log('🐱‍👤 : AuthService : payload', payload);
     const expDate: Date = this.jwtHelper.getTokenExpirationDate(token);
-    // console.log('🐱‍👤 : AuthService : expDate', expDate);
+    console.log('🐱‍👤 : AuthService : expDate', expDate);
 
     // * Crea un nuovo utente
     const newUser = isGuest

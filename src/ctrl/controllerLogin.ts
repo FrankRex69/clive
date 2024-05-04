@@ -52,8 +52,8 @@ exports.checkLogin = (req: any, res: any, next: any) => {
   
   db.query(select, datiDb, function (err: any, result: any, fields: any) {        
       
-    //if(result.length >= 1){  
-    if(result){             
+    if(result.length >= 1){  
+    // if(result){             
         const jwt = require('.././middleware/jwt'); 
         let token: any = jwt.setToken(usr,pwd,result[0]['idutente'],result[0]['idcommessa'],result[0]['autorizzazione'],result[0]['idutcas'],result[0]['nomecognome'],result[0]['commessanome'], result[0]['btnStream'], result[0]['btnCpt'], result[0]['btnGall'], result[0]['btnGallDel'], result[0]['btnGallUpdate'], result[0]['btnGallDownload'], result[0]['btnInsMkr'], result[0]['btnDelMkr'], result[0]['btnGpsOn'], result[0]['btnBkoff'], result[0]['btnRooms'], result[0]['btnBoard']);
         //let token: any = jwt.setToken(usr,pwd);
