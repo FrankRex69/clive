@@ -56,6 +56,8 @@ export class UserLoginComponent implements OnInit {
           .login(this.loginForm.value.username, this.loginForm.value.password)
           .subscribe(
             (res) => {
+              console.log('------->' + res);
+              
               this.loginForm.reset();
               loadingEl.dismiss();
               if (this.roomId) {
@@ -63,6 +65,7 @@ export class UserLoginComponent implements OnInit {
                   .navigate([`/conference/${this.roomId}`])
                   .then((res) => Storage.remove({ key: 'roomData' }));
               } else {
+                console.log('roooooooooooooms');                
                 this.router.navigateByUrl('/rooms');
               }
             },

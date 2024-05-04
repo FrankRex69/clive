@@ -28,6 +28,8 @@ export class RoomsPage implements ViewWillEnter {
   ) {}
 
   ionViewWillEnter() {
+    console.log('fffffff');
+    
     this.loadingController
       .create({ keyboardClose: true, message: 'Loading Rooms...' })
       .then((loadingEl) => {

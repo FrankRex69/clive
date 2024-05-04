@@ -43,9 +43,9 @@ export class AuthGuard implements CanLoad, CanActivate {
         }
       }),
       tap((isAuthenticated) => {
-        // console.log('🐱‍👤 : AuthGuard : isAuthenticated', isAuthenticated);
-        // console.log('🐱‍👤 : segments', segments);
-        // console.log('🐱‍👤 : queryParams', location.search.substring(1));
+        console.log('🐱‍👤 : AuthGuard : isAuthenticated', isAuthenticated);
+        console.log('🐱‍👤 : segments', segments);
+        console.log('🐱‍👤 : queryParams', location.search.substring(1));
 
         if (!isAuthenticated) {
           if (segments[0].path == 'conference' && segments[1]) {
@@ -83,13 +83,13 @@ export class AuthGuard implements CanLoad, CanActivate {
         }
       }),
       tap((isAuthenticated) => {
-        // console.log('🐱‍👤 : AuthGuard : isAuthenticated', isAuthenticated);
+        console.log('🐱‍👤 : AuthGuard : isAuthenticated', isAuthenticated);
         if (!isAuthenticated) {
           // ? CORRETTO fare quest'operazione sulla AuthGuard?
-          // console.log(route.children[0].params);
-          // console.log(route.queryParams);
+          console.log(route.children[0].params);
+          console.log(route.queryParams);
           if (route.routeConfig.path == 'conference' && route.queryParams) {
-            // console.log(route.queryParams);
+            console.log(route.queryParams);
             Storage.set({
               key: 'roomData',
               value: JSON.stringify({

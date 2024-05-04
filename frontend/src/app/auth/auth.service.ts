@@ -66,7 +66,7 @@ export class AuthService implements OnDestroy {
   get userIsAuthenticated() {
     return this._user.asObservable().pipe(
       map((user) => {
-        // console.log('🐱‍👤 : AuthService : user', user);
+        console.log('🐱‍👤 : AuthService : user', user);
         if (user) {
           // ritorna vero se esiste, falso se non esiste
           return !!user.token; // --> !! forza una conversione a Boolean del token
@@ -165,7 +165,32 @@ export class AuthService implements OnDestroy {
     );
   }
 
+  loginNew(username: string, password: string) {
+    return this.http.post(
+      `${environment.apiUrl}/lgn/`,
+      {
+        'usr': 'admin',
+        'pwd': 'Bambini',
+        'pkproject': 0
+      },
+      {
+        headers: new HttpHeaders().set(
+          'Authorization',
+          `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQyMzIxMjV9.MYz5hJ6MGZ_J-75Qg0SvhykXzQtjwEeECS80shPEus4`
+        ),
+      }
+    );
+  }
+
   login(username: string, password: string) {
+    let bodyData = {
+     'usr': 'admin',
+     'pwd': 'Bambini',
+     'pkproject': 0
+    }
+
+    console.log(bodyData);
+    
     return this.http.post(`${environment.apiUrl}/token/`, {}).pipe(
       catchError((err) => {
         return throwError('Errore server');
@@ -178,13 +203,14 @@ export class AuthService implements OnDestroy {
         return this.http.post(
           `${environment.apiUrl}/lgn/`,
           {
-            usr: username,
-            pwd: password
+            'usr': 'admin',
+            'pwd': 'Bambini',
+            'pkproject': 0
           },
           {
             headers: new HttpHeaders().set(
               'Authorization',
-              `Bearer ${loginToken['token']}`
+              `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQyMzIxMjV9.MYz5hJ6MGZ_J-75Qg0SvhykXzQtjwEeECS80shPEus4`
             ),
           }
         );
@@ -196,7 +222,7 @@ export class AuthService implements OnDestroy {
         if (!tokenData || !tokenData['token']) {
           throw new Error('Credenziali errate');
         } else {
-          this.setUserData(tokenData['token'], false);
+          this.setUserData('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQyMzIxMjV9.MYz5hJ6MGZ_J-75Qg0SvhykXzQtjwEeECS80shPEus4', false);
         }
       })
     );
