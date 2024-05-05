@@ -65,6 +65,8 @@ export class AuthService implements OnDestroy {
     return this._user.asObservable().pipe(
       map((user) => {
         console.log('🐱‍👤 : AuthService : user', user);
+        console.log('-------------------------------');
+        
         if (user) {
           // ritorna vero se esiste, falso se non esiste
           return !!user.token; // --> !! forza una conversione a Boolean del token
@@ -160,23 +162,6 @@ export class AuthService implements OnDestroy {
 
         return newUser;
       })
-    );
-  }
-
-  loginNew(username: string, password: string) {
-    return this.http.post(
-      `${environment.apiUrl}/lgn/`,
-      {
-        'usr': 'admin',
-        'pwd': 'Bambini',
-        'pkproject': 0
-      },
-      {
-        headers: new HttpHeaders().set(
-          'Authorization',
-          `Bearer eyJhbGciOiJIUzI1NiJ9.W29iamVjdCBPYmplY3Rd.3bEqMdpH68tp1ZbRneuSatEi0QTAsf09mH4g5A1qo7c`
-        ),
-      }
     );
   }
 

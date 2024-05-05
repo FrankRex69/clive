@@ -58,6 +58,10 @@ export class UserLoginComponent implements OnInit {
             (res) => {              
               this.loginForm.reset();
               loadingEl.dismiss();
+              console.log(res);
+              console.log('----');
+              
+              
               if (this.roomId) {
                 this.router
                   .navigate([`/conference/${this.roomId}`])

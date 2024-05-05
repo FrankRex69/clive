@@ -55,42 +55,48 @@ exports.getSelect = (req: any, res: any, next: any) => {
         
         case "room":
             
-            //sql="SELECT multistreaming.cod AS cod, multistreaming.id AS id, multistreaming.usermobile AS usermobile, multistreaming.progettoselezionato AS progettoselezionato, utenti.collaudatoreufficio AS collaudatoreufficio, multistreaming.DataInsert AS DataInsert FROM multistreaming INNER JOIN utenti ON utenti.id = multistreaming.collaudatoreufficio ";
-            
-            sql = 'SELECT multistreaming.cod AS cod, multistreaming.id AS id, multistreaming.usermobile AS usermobile, multistreaming.progettoselezionato AS progettoselezionato, rappre_prog_gisfo.DataLastSincro AS dataLastsincro, utenti.collaudatoreufficio AS collaudatoreufficio, utenti.id AS idutente, multistreaming.DataInsert AS DataInsert, commesse.id AS idcommessa, commesse.denominazione AS commessa ';
-            sql = sql + ' FROM multistreaming INNER JOIN utenti ON utenti.id = multistreaming.collaudatoreufficio ';
-            sql = sql + ' INNER JOIN commesse ON commesse.id = utenti.idcommessa ';
-            sql = sql + ' INNER JOIN rappre_prog_gisfo ON rappre_prog_gisfo.nome = multistreaming.progettoselezionato ';
+          //sql="SELECT multistreaming.cod AS cod, multistreaming.id AS id, multistreaming.usermobile AS usermobile, multistreaming.progettoselezionato AS progettoselezionato, utenti.collaudatoreufficio AS collaudatoreufficio, multistreaming.DataInsert AS DataInsert FROM multistreaming INNER JOIN utenti ON utenti.id = multistreaming.collaudatoreufficio ";
+          
+          sql = 'SELECT multistreaming.cod AS cod, multistreaming.id AS id, multistreaming.usermobile AS usermobile, multistreaming.progettoselezionato AS progettoselezionato, rappre_prog_gisfo.DataLastSincro AS dataLastsincro, utenti.collaudatoreufficio AS collaudatoreufficio, utenti.id AS idutente, multistreaming.DataInsert AS DataInsert, commesse.id AS idcommessa, commesse.denominazione AS commessa ';
+          sql = sql + ' FROM multistreaming INNER JOIN utenti ON utenti.id = multistreaming.collaudatoreufficio ';
+          sql = sql + ' INNER JOIN commesse ON commesse.id = utenti.idcommessa ';
+          sql = sql + ' INNER JOIN rappre_prog_gisfo ON rappre_prog_gisfo.nome = multistreaming.progettoselezionato ';
 
-            //"id" sarebbe "idroom"
-            if(idroom==''){ 
-                if (idutcas == '') {                   
-                    sql= sql + "ORDER BY id DESC";               
-                }
-                else
-                //idutcas != '' ==> utente specifico
-                {
-                    sql= sql + " WHERE IF((SELECT autorizzazioni FROM `utenti` WHERE `idutcas` = '" + idutcas + "') = 3,";
-                    sql= sql + " idcommessa = (SELECT idcommessa FROM `utenti` WHERE `idutcas` = '" + idutcas + "'),";
-                    sql= sql + " IF((SELECT autorizzazioni FROM `utenti` WHERE `idutcas` = '" + idutcas + "') = 1,";
-                    sql= sql + " utenti.idutcas !='',";
-                    sql= sql + " utenti.idutcas = (SELECT idutcas FROM `utenti` WHERE `idutcas` = '" + idutcas + "')))";
-                    sql= sql + " ORDER BY id DESC";
-
-                }     
-                         
-            }
-            else
-            {
-                if (idutcas == '') {                  
-                    sql= sql + "WHERE multistreaming.id = " + idroom + " ORDER BY id DESC";               
-                }
-                else
-                {                  
-                  sql= sql + "WHERE multistreaming.id = " + idroom + " AND utenti.idutcas = '" + idutcas + "' ORDER BY id DESC"; 
-                }                
-            }              
-            
+          //"id" sarebbe "idroom"
+          if(idroom==''){
+            console.log('aaaaaaaaaaaaaa');
+              console.log(idutcas);
+              
+              if (idutcas == '') {
+                console.log('bbbbbbbbbbbbbbb');
+                  sql= sql + "ORDER BY id DESC";               
+              }
+              else
+              //idutcas != '' ==> utente specifico
+              {
+                console.log('ccccccccc');
+                console.log(idutcas);
+                
+                  sql= sql + " WHERE IF((SELECT autorizzazioni FROM `utenti` WHERE `idutcas` = '" + idutcas + "') = 3,";
+                  sql= sql + " idcommessa = (SELECT idcommessa FROM `utenti` WHERE `idutcas` = '" + idutcas + "'),";
+                  sql= sql + " IF((SELECT autorizzazioni FROM `utenti` WHERE `idutcas` = '" + idutcas + "') = 1,";
+                  sql= sql + " utenti.idutcas !='',";
+                  sql= sql + " utenti.idutcas = (SELECT idutcas FROM `utenti` WHERE `idutcas` = '" + idutcas + "')))";
+                  sql= sql + " ORDER BY id DESC";
+              }                         
+          }
+          else
+          {
+              if (idutcas == '') {                  
+                  sql= sql + "WHERE multistreaming.id = " + idroom + " ORDER BY id DESC";               
+              }
+              else
+              {                  
+                sql= sql + "WHERE multistreaming.id = " + idroom + " AND utenti.idutcas = '" + idutcas + "' ORDER BY id DESC"; 
+              }                
+          }        
+          
+          console.log('select x rooms: ' + sql);            
            
         break;  
 
