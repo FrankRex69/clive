@@ -15,6 +15,7 @@
     "dotenv": "8.2.0",
     "express": "4.17.1",
     "https": "1.0.0",
+    "ip": "^2.0.1",
     "jsonwebtoken": "8.5.1",
     "mysql": "2.18.1",
     "node-media-server": "2.2.7",
@@ -37,6 +38,7 @@
     "tsx": "4.7.2"
   },
   "scripts": {
+    "backend:build": "tsc --build",
     "p:quick": "pretty-quick --staged",
     "p:check": "prettier --check \"frontend/src/{app,environments}/**/*{.ts,.js,.json,.html,.css,.scss,.md}\"",
     "p:format": "prettier --write \"frontend/src/{app,environments}/**/*{.ts,.js,.json,.html,.css,.scss,.md}\"",
@@ -45,8 +47,8 @@
     "pback": "tsc --build && NODE_ENV=production node -r dotenv/config ./build/server.js",
     "dev": "tsc --build && cd frontend && ionic build && cd .. && NODE_ENV=development node -r dotenv/config ./build/server.js",
     "prod": "tsc --build && cd frontend && ionic build --prod && cd .. && NODE_ENV=production node -r dotenv/config ./build/server.js",
-    "nodemo": "nodemon -e ts  --exec \"npm run myapp\"",
-    "myapp": "tsc -p . && node build/server.js"
+    "local:global": "cd nms && pm2 start app.js && cd.. && pm2 start npm -- watch && cd frontend && pm2 start npm -- ionic-start",
+    "local1": "pm2 start npm --name 'backend:watch' -- run 'watch'"
   },
   "author": "",
   "license": "ISC"

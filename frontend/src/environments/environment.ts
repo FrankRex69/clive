@@ -6,7 +6,7 @@ console.log('location.hostname: ', location.hostname);
 
 export const environment = {
   production: false,
-  app: `http://localhost:8100`,
+  // app: `http://localhost:8100`,
   apiUrl: `http://localhost:9187`,
   urlRTMP: `rtmp://localhost:1941`,
   urlWSS: `ws://localhost:8471`,
