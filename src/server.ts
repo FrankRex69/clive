@@ -60,7 +60,7 @@ else
 {
   protocol = 'http';
   host = 'localhost';
-  port = process.env.PORT_DEV;
+  port = process.env.PORT_DEV || 9187;
   server = require(protocol).createServer({}, app);
 } 
 

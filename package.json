@@ -23,6 +23,8 @@
     "os": "0.1.1",
     "pg": "8.5.1",
     "socket.io": "4.1.2",
+    "tsc": "2.0.4",
+    "typescript": "5.4.5",
     "util": "0.12.3",
     "validator": "13.5.2"
   },
@@ -48,7 +50,8 @@
     "dev": "tsc --build && cd frontend && ionic build && cd .. && NODE_ENV=development node -r dotenv/config ./build/server.js",
     "prod": "tsc --build && cd frontend && ionic build --prod && cd .. && NODE_ENV=production node -r dotenv/config ./build/server.js",
     "local:global": "cd nms && pm2 start app.js && cd.. && pm2 start npm -- watch && cd frontend && pm2 start npm -- ionic-start",
-    "local1": "pm2 start npm --name 'backend:watch' -- run 'watch'"
+    "local1": "pm2 start npm --name 'backend:watch' -- run 'watch'",
+    "tsc-build": "./node_modules/typescript/bin/tsc"
   },
   "author": "",
   "license": "ISC"
