@@ -3,11 +3,11 @@ console.log('location.hostname: ', location.hostname);
 export const environment = {
   production: true,
   // app: 'http://localhost:9419',
-  apiUrl: 'http://localhost:9999',
-  urlRTMP: 'rtmp://www.collaudolive.com:1949',
-  urlWSS: 'wss://www.collaudolive.com:8479',
-  urlNMS: `http://localhost:8479/admin/streams`,
-  wsEndpoint: 'wss://www.collaudolive.com:5556/ws/',
+  apiUrl: 'http://212.227.29.217:9999',
+  urlRTMP: 'rtmp://212.227.29.217:1949',  
+  urlWSS: 'ws://212.227.29.217:8479',
+  urlNMS: `http://212.227.29.217:8479/admin/streams`,
+  wsEndpoint: 'ws://212.227.29.217:5556/ws/',
   RTCPeerConfiguration: {
     iceServers: [
       {
