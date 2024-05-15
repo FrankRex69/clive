@@ -28,7 +28,11 @@ $ pm2 start build/server.js
 
 ---
 
-# frontend-angular-ionic-docker
+## frontend-angular-ionic-docker
+```bash
+ionic build (for develop)
+ionic build --prod (for production)
+```
 
 ## Docker section
 ```bash
