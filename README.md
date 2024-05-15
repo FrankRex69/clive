@@ -42,9 +42,10 @@ $ docker rm $(docker ps -a -q)
 
 # DOCKER DEPLOY (in root)
 $ docker network create proxy (docker network ls, docker network prune)
-## Docker for developer mode in local
-$ IMAGE=clive:clive TARGET=local docker compose -f docker-compose.yml --env-file ./.env up 
-
+## Docker for developer mode in dev-local
+$ docker compose -f docker-compose-local.yml --env-file ./.env up
+## Docker for production model
+$ IMAGE=clive:clive TARGET=local docker compose -f docker-compose.yml --env-file ./.env up
 ```
 
 
