@@ -46,9 +46,12 @@ let protocol: string;
 let host: string;
 let port: any;
 if (process.env.NODE_ENV == 'production' && process.env.NODE_ENV != undefined) {
+  console.log('prod');
+  
   // protocol = 'https';
   protocol = 'http';
   host = ip.address();
+  
   port = process.env.PORT_PROD || 9999;
   // server = require(protocol).createServer( 
   // 	{
@@ -59,8 +62,12 @@ if (process.env.NODE_ENV == 'production' && process.env.NODE_ENV != undefined) {
 } 
 else
 {
+  console.log('dev');
   protocol = 'http';
-  host = 'localhost';
+  //host = 'localhost';
+
+  host = '212.227.29.217'
+  // host = ip.address() || 'localhost';
   port = process.env.PORT_DEV || 9187;
   server = require(protocol).createServer({}, app);
 } 

@@ -3,7 +3,7 @@ const crecry = require('./CreCry');
 const mysql = require('mysql');
 const fs = require('fs');
 
-let db_host = 'localhost'
+let db_host = 'db'
 if (process.env.NODE_ENV == 'production') {
     db_host='db'
 }
