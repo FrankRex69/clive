@@ -40,7 +40,6 @@
     "tsx": "4.7.2"
   },
   "scripts": {
-    "backend:build": "tsc --build",
     "p:quick": "pretty-quick --staged",
     "p:check": "prettier --check \"frontend/src/{app,environments}/**/*{.ts,.js,.json,.html,.css,.scss,.md}\"",
     "p:format": "prettier --write \"frontend/src/{app,environments}/**/*{.ts,.js,.json,.html,.css,.scss,.md}\"",

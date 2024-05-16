@@ -40,7 +40,7 @@ COPY . /app
 ENTRYPOINT pm2 start nms/app.js && pm2 start build/server.js
 
 
-FROM node:20 AS prod
+FROM node:20 AS production
 
 # Set the working directory. If it doesn't exists, it'll be created
 WORKDIR /app
@@ -55,20 +55,9 @@ COPY ./package.json /app/package.json
 # Install the dependencies
 RUN npm install
 
-
-# Ionic compile
-# CMD cd frontend && ionic build
-# Install ionic as a global dependency
-#RUN npm install -g ionic
-
-
-
 # Install ffmpeg
 RUN apt update
 RUN apt install ffmpeg -y
-
-# Install the dependencies
-#RUN npm install
 
 # Copy the file `package.json` from current folder
 # inside our image in the folder `/app`
@@ -83,6 +72,4 @@ COPY ./build /app/build
 COPY ./frontend/www /app/frontend/www
 
 # Command
-# ENTRYPOINT npm run watch
 ENTRYPOINT pm2 start nms/app.js && node build/server.js
-# ENTRYPOINT pm2 start nms/app.js && pm2 start npm --name 'backend:watch' -- run 'watch'

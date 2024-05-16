@@ -46,15 +46,16 @@ let protocol: string;
 let host: string;
 let port: any;
 if (process.env.NODE_ENV == 'production' && process.env.NODE_ENV != undefined) {
-  protocol = 'https';
+  // protocol = 'https';
+  protocol = 'http';
   host = ip.address();
-  port = process.env.PORT_PROD;
-  server = require(protocol).createServer( 
-  	{
-  		key: fs.readFileSync('/etc/letsencrypt/live/www.collaudolive.com/privkey.pem'),
-      cert: fs.readFileSync('/etc/letsencrypt/live/www.collaudolive.com/cert.pem')
-  	},
-  app);
+  port = process.env.PORT_PROD || 9999;
+  // server = require(protocol).createServer( 
+  // 	{
+  // 		key: fs.readFileSync('/etc/letsencrypt/live/www.collaudolive.com/privkey.pem'),
+  //     cert: fs.readFileSync('/etc/letsencrypt/live/www.collaudolive.com/cert.pem')
+  // 	},
+  // app);
 } 
 else
 {
