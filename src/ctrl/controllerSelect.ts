@@ -133,7 +133,8 @@ exports.getSelect = (req: any, res: any, next: any) => {
         case "progetti":
           sql = 'SELECT rappre_prog_gisfo.id AS idprogetto, rappre_prog_gisfo.DataSincro AS datasincro, rappre_prog_gisfo.DataLastSincro AS DataLastSincro, utenti.collaudatoreufficio, rappre_prog_gisfo.pk_proj AS pk_proj, rappre_prog_gisfo.nome AS nome, rappre_prog_gisfo.nodi_fisici AS nodi_fisici, rappre_prog_gisfo.nodi_ottici AS nodi_ottici, rappre_prog_gisfo.tratte AS tratte, rappre_prog_gisfo.conn_edif_opta AS conn_edif_opta, rappre_prog_gisfo.long_centro_map AS long_centro_map, rappre_prog_gisfo.lat_centro_map AS lat_centro_map, utenti.id AS idutente, commesse.id AS idcommessa, commesse.denominazione AS commessa';
           sql = sql + ' FROM `rappre_prog_gisfo` INNER JOIN utenti ON utenti.id = rappre_prog_gisfo.idutente INNER JOIN `commesse` ON utenti.idcommessa = commesse.id ORDER BY `idprogetto` DESC';
-        
+          console.log(sql);
+          
         break; 
           
         case "commessa":
