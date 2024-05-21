@@ -18,7 +18,7 @@ services:
       # Opens port 3306 on the container
       - '3306'
     volumes:
-      - ./docker_volumes/mysql_data:/var/lib/mysql  
+      - ./docker_volumes/mysql_data:/var/lib/mysql
        
   phpmyadmin:
     image: 'phpmyadmin:latest'
