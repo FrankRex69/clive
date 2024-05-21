@@ -28,6 +28,7 @@ $ pm2 start build/server.js
 
 ---
 
+<<<<<<< HEAD
 # frontend-angular-ionic-docker
 
 ## Docker section
@@ -41,6 +42,47 @@ $ docker network create proxy (docker network ls, docker network prune)
 ## Docker for developer mode in local
 $   
 
+=======
+## frontend-angular-ionic-docker
+```bash
+ionic build (for develop)
+ionic build --prod (for production)
+```
+
+# Working environment section
+
+### DEVELOP MODE
+```bash
+## docker network
+$ docker network create proxy
+
+## Docker for developer mode in dev-local (only db-mysql and phpmyadmin)
+$ docker compose -f docker-compose-local.yml --env-file ./.env up
+
+## start Node Media Server
+$ node nms/app.js
+
+## start backend in watch mode
+$ npm run watch
+
+## start frontend in watch mode
+$ cd frontend && ionic serve
+```
+
+### PRODUCTION MODE
+```bash
+## docker network
+$ docker network create proxy
+
+## backend build
+$ tsc --build
+
+## frontend build
+$ cd frontend && ionic build --prod
+
+## Docker for production model
+$ IMAGE=clive:clive TARGET=production docker compose -f docker-compose.yml --env-file ./.env up
+>>>>>>> 3880af1447672dd89e3cbc52a027bfc23aad958c
 ```
 
 

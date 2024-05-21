@@ -51,6 +51,8 @@ exports.checkLogin = (req: any, res: any, next: any) => {
   // } 
   
   db.query(select, datiDb, function (err: any, result: any, fields: any) {        
+    
+    console.log(err);
       
     if(result && result.length >= 1){          
         const jwt = require('.././middleware/jwt'); 
@@ -76,11 +78,11 @@ exports.checkLogin = (req: any, res: any, next: any) => {
         }
 
       }
-      else
-      {
-        console.log('Credenziali NON presenti o NON corrette.');         
-        res.json(false);
-      }        
+    else
+    {
+      console.log('Credenziali NON presenti o NON corrette. !!');         
+      res.json(false);
+    }        
       
     });    
 

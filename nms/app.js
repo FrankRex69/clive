@@ -4,17 +4,21 @@ const fs = require("fs");
 require('dotenv').config();
 
 // Selezione cartella a seconda di "produzione" o "sviluppo"    
-if (process.env.NODE_ENV == 'production') {
-  port_nms_rtmp=1949; 
-  port_nms_http=8019;
-  port_nms_https=8479;
-}
-else
-{
-  port_nms_rtmp=1941;  
-  port_nms_http=8015;  
-  port_nms_https=8471; 
-}
+// if (process.env.NODE_ENV == 'production') {
+//   port_nms_rtmp=1949;
+//   port_nms_http=8019;
+//   port_nms_https=8479;
+// }
+// else
+// {
+//   port_nms_rtmp=1941;
+//   port_nms_http=8015;
+//   port_nms_https=8471;
+// }
+
+port_nms_rtmp=1941;
+port_nms_http=8015;
+port_nms_https=8471;
  
 const config = {
   rtmp: {
