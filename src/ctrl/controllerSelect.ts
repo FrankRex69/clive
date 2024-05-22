@@ -64,18 +64,16 @@ exports.getSelect = (req: any, res: any, next: any) => {
 
           //"id" sarebbe "idroom"
           if(idroom==''){
-            console.log('aaaaaaaaaaaaaa');
+            
               console.log(idutcas);
               
               if (idutcas == '') {
-                console.log('bbbbbbbbbbbbbbb');
+                
                   sql= sql + "ORDER BY id DESC";               
               }
               else
               //idutcas != '' ==> utente specifico
-              {
-                console.log('ccccccccc');
-                console.log(idutcas);
+              {       
                 
                   sql= sql + " WHERE IF((SELECT autorizzazioni FROM `utenti` WHERE `idutcas` = '" + idutcas + "') = 3,";
                   sql= sql + " idcommessa = (SELECT idcommessa FROM `utenti` WHERE `idutcas` = '" + idutcas + "'),";
