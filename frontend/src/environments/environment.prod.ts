@@ -6,7 +6,7 @@ export const environment = {
   apiUrl: 'https://frx-tech.com:9187',
   urlRTMP: 'rtmp://frx-tech.com:1941',  
   urlWSS: 'wss://frx-tech.com:8471',
-  urlNMS: `https://frx-tech.com:8471/admin/streams`,
+  urlNMS: `http://frx-tech.com:8471/admin/streams`,
   wsEndpoint: 'wss://frx-tech.com:5556/ws/',
   RTCPeerConfiguration: {
     iceServers: [
