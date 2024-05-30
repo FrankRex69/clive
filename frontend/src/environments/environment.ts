@@ -9,8 +9,8 @@ export const environment = {
   // app: `http://localhost:8100`,
   apiUrl: `http://localhost:9187`,
   urlRTMP: `rtmp://localhost:1941`,
-  urlWSS: `ws://localhost:8471`,
-  urlNMS: `http://localhost:8471/admin/streams`,
+  urlWSS: `ws://localhost:8015`,
+  urlNMS: `http://localhost:8015/admin/streams`,
   wsEndpoint: 'ws://localhost:5556/ws/',
   RTCPeerConfiguration: {
     iceServers: [
