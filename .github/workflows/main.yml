@@ -1,0 +1,74 @@
+name: Deploy
+on:
+  pull_request:
+    branches: [ dev-local ]
+    types: [ closed ]
+jobs:
+  Stop_and_remove_container:
+    name: Stop and remove container
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest    
+    steps:
+      - uses: actions/checkout@v2 
+      - name: Stop & Remove
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${{secrets.USER_NAME}}@${{secrets.SSH_HOST_PROD}} '
+          docker stop clive
+          docker rm $(docker ps -a -q)
+          docker system prune -af
+          '
+  Build_image_app_and_publish:
+    needs: Stop_and_remove_container
+    runs-on: ubuntu-latest 
+    name: Build and Push image
+    steps:
+      - uses: actions/checkout@v3 
+      - name: Build & Push image
+        run: |
+          docker login -u "${{secrets.LOGIN_DOCKERHUB}}" -p "${{secrets.PASS_DOCKERHUB}}" docker.io
+          docker build --target development -t 3481974/clive:clive .
+          docker push docker.io/3481974/clive:clive
+  Build_Containers:
+    needs: Build_image_app_and_publish
+    name: Build containers
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest    
+    steps:
+      - uses: actions/checkout@v3 
+      - name: Build containers
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${{secrets.USER_NAME}}@${{secrets.SSH_HOST_PROD}} '
+          docker network create proxy
+          docker run --name db --network proxy \
+          -e MYSQL_HOST=${{secrets.MYSQL_HOST}} \
+          -e MYSQL_DATABASE=${{secrets.MYSQL_DB}} \
+          -e MYSQL_USER=${{secrets.MYSQL_USER}} \
+          -e MYSQL_PASSWORD=${{secrets.MYSQL_PASSWORD}} \
+          -e MYSQL_ROOT_PASSWORD=${{secrets.MYSQL_PASSWORD}} \
+          -e TZ=Europe/Rome \
+          -e PGTZ=Europe/Rome \
+          -p 5432:5432 \
+          -v /var/lib/docker/volumes/mysql_data:/var/lib/mysql \
+          -d mysql:5.7
+          docker run --name phpmyadmin --network proxy -p 8088:80 -e "MYSQL_ROOT_PASSWORD=${{secrets.MYSQL_PASSWORD}}" -d phpmyadmin:latest
+          docker run --name clive --network proxy \
+          -e MYSQL_HOST=${{secrets.MYSQL_HOST}} \
+          -e MYSQL_DATABASE=${{secrets.MYSQL_DB}} \
+          -e MYSQL_USER=${{secrets.MYSQL_USER}} \
+          -e MYSQL_PASSWORD=${{secrets.MYSQL_PASSWORD}} \
+          -e MYSQL_ROOT_PASSWORD=${{secrets.MYSQL_PASSWORD}} \
+          -e TZ=Europe/Rome \
+          -e PGTZ=Europe/Rome \
+          -p 9187:9187 \
+          -p 9999:9999 \
+          -p 8015:8015 \
+          -p 8019:8019 \
+          -p 1941:1941 \
+          -p 1949:1949 \
+          -p 8471:8471 \
+          -p 8479:8479 \
+          -p 5556:5556 \
+          -d 3481974/clive:clive
+          '

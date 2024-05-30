@@ -3,13 +3,16 @@ import path from 'path';
 import fs from 'fs';
 const routes = require('./routes');
 const app = express();
-import * as dotenv from 'dotenv';
 
-let url_env_base = __dirname;
-let url_env: string = url_env_base.replace("build",".env")
-dotenv.config({ path:url_env});
+require('dotenv').config();
+const ip = require("ip");
 
-let port: any;
+
+// let url_env_base = __dirname;
+// let url_env: string = url_env_base.replace("build",".env")
+// dotenv.config({ path:url_env});
+
+// let port: any;
 // if (process.env.NODE_ENV == 'production' && process.env.NODE_ENV != undefined) {
 //   port = process.env.PORT_PROD;
 // }
@@ -17,7 +20,7 @@ let port: any;
 // {
 //   port = process.env.PORT_DEV;
 // }
-port=9187;
+
 
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
@@ -32,24 +35,35 @@ app.use('/', routes);
 
 //Indirizzamento verso route FRONTEND
 app.use('/',express.static(path.join(__dirname, '../frontend/www')));
-app.use('/*', (req, res) => { res.sendFile(path.join(__dirname, '../frontend/www/index.html')); });
+app.use('/*', (req, res) => {res.sendFile(path.join(__dirname, '../frontend/www/index.html')); });
 
 //----------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------
 
 let server: any;
-if (process.env.NODE_ENV == 'production' && process.env.NODE_ENV != undefined) { 
-  server = require('https').createServer( 
+let protocol: string;
+let host: string;
+let port: any;
+if (process.env.NODE_ENV == 'production' && process.env.NODE_ENV != undefined) {
+  console.log('prod');  
+  protocol = 'https';
+  host = 'frx-tech.com';  
+  port = 9187;
+  server = require(protocol).createServer( 
   	{
-  		key: fs.readFileSync('/etc/letsencrypt/live/www.collaudolive.com/privkey.pem'),
-      cert: fs.readFileSync('/etc/letsencrypt/live/www.collaudolive.com/cert.pem')
+  		key: fs.readFileSync('./cert/privkey.pem'),
+      cert: fs.readFileSync('./cert/cert.pem')
   	},
   app);
 } 
 else
 {
-  server = require('http').createServer({}, app);
+  console.log('dev');
+  protocol = 'http';
+  host = 'localhost';  
+  port = 9187;
+  server = require(protocol).createServer({}, app);
 } 
 
 
@@ -58,9 +72,19 @@ else
 //-----------------------------------------------------------------------------------------------------
 
 // -- Cors 
+// const options = {
+//   cors: {
+//     origin: [protocol+'://'+host, protocol+'://'+host+':8100'],
+//     methods: ["GET", "POST"],
+//     transports: ['websocket', 'polling'],
+//     credentials: true     
+//   },
+//   allowEIO3: true
+// };
+
 const options = {
   cors: {
-    origin: [`http://localhost`,`http://localhost:8100`],
+    origin: [protocol+'://'+host, protocol+'://'+host+':8100'],
     methods: ["GET", "POST"],
     transports: ['websocket', 'polling'],
     credentials: true     
@@ -103,13 +127,13 @@ io.on('error',function(e: any){
 //-----------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------
 
-
 server.listen(port, function(){  
-  console.log(`http://localhost:${port}`);
+  console.log('running at '+ protocol +'://'+ host +':'+ port);
+  console.log('Rtmp admin at '+ protocol +'://'+ host +':8015/admin');
 });
 
 process.on('uncaughtException', function(err) {
     // handle the error safely
-    console.log('Errore :' + err);
+    console.log('Errore!! :' + err);
     // Note: after client disconnect, the subprocess will cause an Error EPIPE, which can only be caught this way.
 })
