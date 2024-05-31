@@ -12,9 +12,11 @@ $ docker compose -f docker-compose-local.yml --env-file ./.env up
 $ node nms/app.js
 
 ## start backend in watch mode
+$ npm install
 $ npm run watch
 
 ## start frontend in watch mode
+$ npm install --legacy-peer-deps
 $ cd frontend && ionic serve
 ```
 

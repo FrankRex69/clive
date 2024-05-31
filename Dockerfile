@@ -1,4 +1,4 @@
-FROM node:20 AS production
+FROM node:16.20.2 AS production
 
 # Set the working directory. If it doesn't exists, it'll be created
 WORKDIR /app

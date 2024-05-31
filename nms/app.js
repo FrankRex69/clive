@@ -32,11 +32,11 @@ const config = {
     port: port_nms_http,
     allow_origin: '*'
    },
-  // https: {
-  //   port: port_nms_https,
-  //   key: fs.readFileSync('./cert/privkey.pem'),
-  //   cert: fs.readFileSync('./cert/cert.pem')
-  // }
+  https: {
+    port: port_nms_https,
+    key: 'cert/privkey.pem',
+    cert: 'cert/cert.pem'
+  }
 };
  
 var nms = new NodeMediaServer(config)

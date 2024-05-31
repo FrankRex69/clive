@@ -129,7 +129,7 @@ io.on('error',function(e: any){
 
 server.listen(port, function(){  
   console.log('running at '+ protocol +'://'+ host +':'+ port);
-  console.log('Rtmp admin at '+ protocol +'://'+ host +':8015/admin');
+  console.log('Rtmp admin at '+ protocol +'://'+ host +':8471/admin');
 });
 
 process.on('uncaughtException', function(err) {
