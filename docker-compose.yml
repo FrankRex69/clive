@@ -1,9 +1,11 @@
 version: "3.7"
 
-services: 
+services:
   db:
     image: mysql:5.7
     restart: always
+    networks:
+      - proxy
     environment:
       MYSQL_DATABASE: 'db'
       MYSQL_USER: 'user'
@@ -15,9 +17,46 @@ services:
     expose:
       # Opens port 3306 on the container
       - '3306'
+    volumes:
+      - ./docker_volumes/mysql_data:/var/lib/mysql
+
+  app:
+    # name image
+    image: '${IMAGE}'
+    # setup for build image (path for dockerfile e target in docker file [not mandatory])
+    networks:
+      - proxy
+    build:
+      # path Dockerfile
+      context: ./
+      # Target use in dockerfile with multiple setup (example: local, prod)
+      target: '${TARGET}'
+      # entrypoint: bash -c '${COMMAND}'
+    ports:
+      - '${PORT_DEV}:${PORT_DEV}'
+      - '9999:9999'
+      - '8015:8015'
+      - '8019:8019'      
+      - '1941:1941'
+      - '1949:1949'      
+      - '8471:8471'
+      - '8479:8479'
+      - '5556:5556'      
+
+    depends_on:
+      - db
+    # One of the main advantages of using Docker volumes
+    # is the possibility of changing the content/configuration
+    # of a container without the need to recreate it.
+    volumes:
+     - ./src:/app/src
+     - ./build:/app/build
+     - ./frontend/www:/app/frontend/www
        
   phpmyadmin:
     image: 'phpmyadmin:latest'
+    networks:
+      - proxy
     ports:
       - 8088:80
     environment:

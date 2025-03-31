@@ -130,5 +130,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# miscellaneous
+# Docker
 docker_volumes
